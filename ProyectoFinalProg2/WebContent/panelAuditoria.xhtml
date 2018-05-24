@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+
+
+
+
+</h:head>
+
+<body>
+
+
+
+<h:form id="form">
+
+<p:panel id="panelAudit" header="Panel Auditoria" style="margin-bottom:10px;">
+        
+ <p:dataTable id="tableAudit"  var="auditoria" value="#{auditBean.listaAuditoria}" rows="5"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5, 10">
+        <p:column headerText="Id">
+        <h:outputText value="#{auditoria.id}" />
+    </p:column>
+ 
+    <p:column headerText="UserId">
+        <h:outputText value="#{auditoria.userId}" />
+    </p:column>
+ 
+    <p:column headerText="Operation">
+        <h:outputText value="#{auditoria.operation}" />
+    </p:column>
+ 
+    <p:column headerText="TableName">
+        <h:outputText value="#{auditoria.tableName}" />
+    </p:column>
+    <p:column headerText="TableId">
+        <h:outputText value="#{auditoria.tableId}" />
+    </p:column>
+    <p:column headerText="Date">
+        <h:outputText value="#{auditoria.createDate}" />
+    </p:column>
+         
+        <f:facet name="paginatorTopLeft">
+            <p:commandButton type="button" icon="fa fa-sync" />
+        </f:facet>
+ 
+        <f:facet name="paginatorBottomRight">
+            <p:commandButton type="button" icon="fa fa-cloud-upload" />
+        </f:facet>
+    </p:dataTable>
+
+
+</p:panel>
+</h:form>
+
+
+
+
+
+ 
+    
+ 
+
+
+ 
+
+
+
+</body>
+</html>

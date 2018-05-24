@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<h:outputStylesheet library="css" name="Registro.css"></h:outputStylesheet>
+</h:head>
+
+
+<h:body>
+
+	<h:form id="formulario">
+		<p:panel id="panel" header="Registro" styleClass="panel">
+
+			<p:messages id="msgs" />
+
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Nombre Completo:" />
+				<p:inputText value="#{userBean.user.fullName}" required="true"
+					requiredMessage="Campo de Nombre Completo obligatorio"
+					id="txtNombre"></p:inputText>
+
+
+				<p:outputLabel value="Correo Electrónico:" />
+				<p:inputText value="#{userBean.user.emailAddress}" required="true"
+					requiredMessage="Campo de Correo Electrónico obligatorio"
+					id="txtCorreo">
+				</p:inputText>
+	
+					<p:outputLabel value="Usuario:" />
+					<p:inputText value="#{userBean.user.userName}" required="true"
+						requiredMessage="Campo de Usuario obligatorio">
+					</p:inputText>
+
+					<h:commandButton value="Registrarse"
+						action="#{userBean.adicionarUsuario}"></h:commandButton>
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+	<h:form>
+
+		<h:commandButton value="Regresar" action="PaginaPrincipal.xhtml"
+			style="width:100px; height:40px;  margin-bottom: 120px; margin-left: 90px"></h:commandButton>
+	</h:form>
+</h:body>
+</html>

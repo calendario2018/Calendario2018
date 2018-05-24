@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Gestión de Estadios</title>
+</h:head>
+<h:body>
+	<h1>Listado de Estadios</h1>
+	<h:dataTable value="#{stadiumBean.listaEstadio}" var="estadio">
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Id" />
+			</f:facet>
+			<h:outputText value="#{estadio.id}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Capacity" />
+			</f:facet>
+			<h:outputText value="#{estadio.capacity}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="City" />
+			</f:facet>
+			<h:outputText value="#{estadio.city}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Photo" />
+			</f:facet>
+			<h:outputText value="#{estadio.photo}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Population" />
+			</f:facet>
+			<h:outputText value="#{estadio.population}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="temperature" />
+			</f:facet>
+			<h:outputText value="#{estadio.temperature}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Modificar" />
+			</f:facet>
+			<h:form>
+				<h:commandButton action="#{stadiumBean.prepararModificarEstadio}"
+					value="Modificar" />
+			</h:form>
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Eliminar" />
+			</f:facet>
+			<h:form>
+				<h:commandButton action="#{stadiumBean.eliminarEstadio}"
+					value="Eliminar"></h:commandButton>
+					
+			</h:form>
+			
+		</h:column>
+	</h:dataTable>
+	<h:form><h:commandButton action="panelAdmin.xhtml"
+					value="Volver"></h:commandButton></h:form>
+	<br />
+</h:body>
+</html>

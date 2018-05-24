@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head>
+
+	<style>
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.highlight
+{
+	background: rgb(171, 3, 3);
+}
+
+.ui-datatable- {
+    background: blue;
+}
+
+/* Style the header */
+.header {
+	background-color: rgb(146, 119, 9);
+	padding: 30px;
+	text-align: center;
+	font-size: 35px;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+	float: left;
+	padding: 10px;
+	height: 300px; /* Should be removed. Only for demonstration */
+}
+
+
+/* Clear floats after the columns */
+
+/* Style the footer */
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media ( max-width : 600px) {
+	.column.side, .column.middle {
+		width: 100%;
+	}
+}
+</style>
+
+</h:head>
+
+<h:body>
+
+	<div class="header">
+
+		<p:contentFlow value="#{imagesView.images}" var="image">
+			<p:graphicImage name="./images/#{image}" styleClass="content" />
+			<div class="caption">¡¡¡MUNDIAL RUSIA 2018!!!</div>
+		</p:contentFlow>
+
+	</div>
+
+	<div class="row">
+		<div class="column" style="background-color: rgb(146, 143, 9);">
+
+
+			<p:outputLabel>Buscar por ciudad</p:outputLabel>
+			<h:form>
+
+				<h:inputText id="buscar" value="#{stadiumBean.buscar}"></h:inputText>
+				<p:commandButton value="Buscar" update="table"
+					actionListener="#{stadiumBean.buscarEstadio}" />
+			</h:form>
+
+			<p:dataTable id="table" var="stadium" rowStyleClass="highlight"
+				value="#{stadiumBean.filtrados}" rows="4" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5, 10">
+
+
+				<p:column headerText="Capacidad">
+					<h:outputText value="#{stadium.capacity}" />
+				</p:column>
+
+				<p:column headerText="Ciudad">
+					<h:outputText value="#{stadium.city}" />
+				</p:column>
+
+
+				<p:column headerText="Población">
+					<h:outputText value="#{stadium.population}" />
+				</p:column>
+
+				<p:column headerText="Temperatura">
+					<h:outputText value="#{stadium.temperature}" />
+				</p:column>
+
+			</p:dataTable>
+
+
+		</div>
+	</div>
+
+
+</h:body>
+
+
+</html>

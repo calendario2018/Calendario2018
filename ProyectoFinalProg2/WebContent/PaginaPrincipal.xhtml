@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head>
+	<h:outputStylesheet library="css" name="PaginaPrincipal.css"></h:outputStylesheet>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<style>
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+.header {
+	background-color: #f1f1f1;
+	padding: 1px;
+	text-align: center;
+	font-size: 35px;
+}
+
+/* Container for flexboxes */
+.row {
+	display: -webkit-flex;
+	display: flex;
+}
+
+/* Create three unequal columns that sits next to each other */
+.column {
+	padding: 10px;
+	height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Left and right column */
+.column.side {
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+}
+
+/* Middle column */
+.column.middle {
+	-webkit-flex: 2;
+	-ms-flex: 2;
+	flex: 2;
+	max-height: 900px;
+}
+
+/* Style the footer */
+.footer {
+	background-color: #f1f1f1;
+	text-align: center;
+	height: 100px;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media ( max-width : 600px) {
+	.row {
+		-webkit-flex-direction: column;
+		flex-direction: column;
+	}
+}
+</style>
+
+
+</h:head>
+
+
+<h:body>
+
+	<div class="header"
+		style="height: 240px; background-color: rgba(253, 132, 132, 0.5)">
+		<p:graphicImage name="./images/Portada2.png" style="width:100%;" />
+
+	</div>
+	<h:form>
+
+
+
+
+
+		<p:growl id="messages" />
+		<p:menubar id="menubar" styleClass="ui-state-hover">
+			<p:menuitem value="Inicio" icon="ui-icon-home"></p:menuitem>
+			<f:facet name="options">
+				<h:commandButton value="Registrarse"
+					action="#{userBean.prepararAdicionarUsuario}"></h:commandButton>
+
+				<h:commandButton value="Iniciar Sesión" action="Login.xhtml"></h:commandButton>
+			</f:facet>
+		</p:menubar>
+
+
+
+
+	</h:form>
+	<div class="row">
+		<div class="column side"
+			style="background-color: rgba(229, 217, 137, 0.2); border-radius: 20px; border-style: dashed;; border-color: rgb(223, 25, 25); border-width: 2px;">
+			<p:imageSwitch effect="fade" styleClass="ima">
+				<ui:repeat value="#{imagesViewBackground.images}" var="images">
+					<p:graphicImage name="./images/#{images}" />
+				</ui:repeat>
+			</p:imageSwitch>
+
+
+		</div>
+		<div class="column middle"
+			style="background-color: rgba(229, 217, 137, 0.2); border-radius: 20px; border-style: dashed;; border-color: rgb(223, 25, 25); border-width: 2px; height: 700px">
+			<iframe
+				src="https://calendar.google.com/calendar/b/2/embed?height=350&amp;wkst=1&amp;hl=es_419&amp;bgcolor=%23ffffff&amp;src=tjaj2g3mntct23kmksg5glgqr8%40group.calendar.google.com&amp;color=%23875509&amp;ctz=America%2FBogota"
+				style="border-width: 0" width="450" height="350" frameborder="0"
+				scrolling="no"></iframe>
+
+		</div>
+		<div class="column side"
+			style="background-color: rgba(229, 217, 137, 0.2); border-radius: 20px; border-style: dashed;; border-color: rgb(223, 25, 25); border-width: 2px">Column</div>
+	</div>
+
+	<div class="footer"
+		style="width: 100%; height: 30px; background-color: rgba(253, 132, 132, 0.5)">
+		<p:graphicImage name="./images/e.png" style="width:100%;" />
+	</div>
+
+
+</h:body>
+</html>

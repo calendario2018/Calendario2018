@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+
+
+	<h:outputStylesheet library="css" name="Registro.css"></h:outputStylesheet>
+
+</h:head>
+<h:body>
+<h:form id="form">
+    <p:panel id="panel" header="Login" style="margin-bottom:10px; background-color:rgb(210,195,115)">
+        <p:messages id="msgs" />
+        <h:panelGrid columns="1">
+            <p:outputLabel for="username" value="Username:" style=" size: 20px" />
+            <p:inputText id="username" value="#{userBean.usuario}" required="true" label="Username" style=" size: 40px; margin-right:80px">
+                <f:validateLength minimum="2" />
+            </p:inputText>
+            <p:message for="username" display="icon" />
+ 
+            <p:outputLabel for="password" value="Password:" />
+            <p:inputText id="password" value="#{userBean.password}" required="true" label="Password">
+            <f:validateLength minimum="1"/>
+            </p:inputText>
+            <p:message for="password" display="icon" />
+          
+<p:captcha id="captcha"></p:captcha>
+
+           
+          </h:panelGrid>
+          
+    </p:panel>
+ 
+    <p:toolbar>
+        <f:facet name="left">
+            <p:commandButton value="Ingresar" update="panel" action="#{userBean.ingresarUsuario}" style="margin-right:20px;"  />
+   
+        </f:facet>
+        
+    </p:toolbar>
+  </h:form>
+
+
+
+
+
+</h:body>
+</html>

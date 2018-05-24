@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+
+</h:head>
+
+
+<h:body>
+
+
+
+	<table border="2" align="center">
+		<h:form>
+			<tr>
+
+				<td colspan="2" align="center"><h1>Estadio</h1></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel>Capacidad</h:outputLabel></td>
+				<td><h:inputText value="#{stadiumBean.stadium.capacity}"
+						required="true"
+						requiredMessage="Campo de Nombre Completo obligatorio"
+						id="txtCapacidad"></h:inputText></td>
+				<h:message for="txtCapacidad" errorStyle="color:blue" />
+
+			</tr>
+			<br></br>
+			<tr>
+				<td><h:outputLabel>Ciudad</h:outputLabel></td>
+				<td><h:inputText value="#{stadiumBean.stadium.city}" 
+						 required="true"
+						requiredMessage="Campo de Correo Electrónico obligatorio"
+						id="txtCiudad"></h:inputText></td>
+				<h:message for="txtCiudad" errorStyle="color:red"></h:message>
+			</tr>
+			<tr>
+				<td><h:outputLabel>Foto</h:outputLabel></td>
+				<td align="center"><h:inputText
+						value="#{stadiumBean.stadium.photo}"></h:inputText></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel>Población</h:outputLabel></td>
+				<td align="center"><h:inputText
+						value="#{stadiumBean.stadium.population}"></h:inputText></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel>Temperatura</h:outputLabel></td>
+				<td align="center"><h:inputText
+						value="#{stadiumBean.stadium.temperature}"></h:inputText></td>
+			</tr>
+			<tr>
+
+				<h:commandButton value="Guardar Modificar" action="#{stadiumBean.modificarEstadio}"></h:commandButton>
+
+			</tr>
+		</h:form>
+	</table>
+</h:body>
+</html>

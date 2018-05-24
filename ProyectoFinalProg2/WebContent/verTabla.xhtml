@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Gestión de Usuarios</title>
+</h:head>
+<h:body>
+	<h1>Listado de Usuarios</h1>
+	<h:dataTable value="#{userBean.listaUsuarios}" var="user">
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Id" />
+			</f:facet>
+			<h:outputText value="#{user.id}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="User Name" />
+			</f:facet>
+			<h:outputText value="#{user.userName}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Password" />
+			</f:facet>
+			<h:outputText value="********" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Full Name" />
+			</f:facet>
+			<h:outputText value="#{user.fullName}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="E-mail" />
+			</f:facet>
+			<h:outputText value="#{user.emailAddress}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Phone Number" />
+			</f:facet>
+			<h:outputText value="#{user.phoneNumber}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Date Last Password" />
+			</f:facet>
+			<h:outputText value="#{user.dateLastPassword}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="User Type" />
+			</f:facet>
+			<h:outputText value="#{user.userType}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Active" />
+			</f:facet>
+			<h:outputText value="Activo" rendered="#{'A' eq user.active}" />
+			<h:outputText value="InActivo" rendered="#{'I' eq user.active}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Modificar" />
+			</f:facet>
+			<h:form>
+				<h:commandButton action="#{userBean.prepararModificarUsuario}"
+					value="Modificar" />
+			</h:form>
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Activar/Desactivar" />
+			</f:facet>
+			<h:form>
+				<h:commandButton action="#{userBean.eliminarUsuario}"
+					value="Activar/Desactivar"></h:commandButton>
+					
+			</h:form>
+		</h:column>
+	</h:dataTable>
+	<br />
+	<h:form>
+	<h:commandButton action="panelAdmin.xhtml"
+					value="Volver"></h:commandButton>
+		<h:commandLink value="Nuevo Usuario"
+			action="#{userBean.prepararAdicionarUsuario}" />
+	</h:form>
+</h:body>
+</html>

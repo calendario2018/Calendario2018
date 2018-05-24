@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+<h:outputStylesheet library="css" name="Registro.css"></h:outputStylesheet>
+</h:head>
+
+
+<h:body>
+
+	<h:form>
+		<p:panel id="panel" header="Registro"
+			styleClass="panel">
+
+			<p:messages id="msgs" />
+
+			<h:panelGrid columns="4">
+				<p:outputLabel value="Ciudad:" />
+				<p:inputText value="#{teamBean.team.country}" required="true"
+					requiredMessage="Campo de Nombre Completo obligatorio"
+					id="txtNombre"></p:inputText>
+
+
+				<p:outputLabel value="Bandera:" />
+				<p:inputText value="#{teamBean.team.flag}" required="true"
+					requiredMessage="Campo de Correo Electrónico obligatorio"
+					id="txtCorreo">
+				</p:inputText>
+
+
+				<p:outputLabel value="Grupo:" />
+				<p:inputText value="#{teamBean.team.group}" required="true"
+					requiredMessage="Campo de Usuario obligatorio">
+				</p:inputText>
+
+
+				<p:outputLabel value="Estado:" />
+				<p:inputText value="#{teamBean.team.state}" required="true"
+					requiredMessage="Campo de Usuario obligatorio">
+				</p:inputText>
+
+
+				<p:outputLabel value="Goles en contra:" />
+				<p:inputText value="#{teamBean.team.goalsAgainst}" required="true"
+					requiredMessage="Campo de Celular obligatorio">
+				</p:inputText>
+
+
+				<p:outputLabel value="Goles a favor:" />
+				<p:inputText value="#{teamBean.team.goalsFavor}" required="true"
+					requiredMessage="Campo de Usuario obligatorio">
+				</p:inputText>
+
+
+				<p:outputLabel value="Partidos jugados:" />
+				<p:inputText value="#{teamBean.team.playedGames}" required="true"
+					requiredMessage="Campo de Usuario obligatorio">
+				</p:inputText>
+
+
+				<p:outputLabel value="Partidos ganados:" />
+				<p:inputText value="#{teamBean.team.wonMatches}" required="true"
+					requiredMessage="Campo de Usuario obligatorio">
+				</p:inputText>
+
+
+				<p:outputLabel value="Partidos empatados:" />
+				<p:inputText value="#{teamBean.team.tiedMatches}" required="true"
+					requiredMessage="Campo de Usuario obligatorio">
+				</p:inputText>
+
+
+				<p:outputLabel value="Partidos perdidos:" />
+				<p:inputText value="#{teamBean.team.lostMatches}" required="true"
+					requiredMessage="Campo de Usuario obligatorio">
+				</p:inputText>
+
+
+				<h:commandButton value="Agregar Equipo"
+					action="#{teamBean.adicionarTeam}"></h:commandButton>
+
+
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+</h:head>
+
+
+<h:body>
+
+	<table border="2" align="center">
+		<h:form>
+			<tr>
+
+				<td colspan="2" align="center"><h1>Goleador</h1></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel>Goleador</h:outputLabel></td>
+				<td><h:inputText value="#{goalscorerBean.goalscorer.fullName}"
+						required="true"
+						requiredMessage="Campo de Nombre Completo obligatorio"
+						id="txtGoleador"></h:inputText></td>
+				<h:message for="txtGoleador" errorStyle="color:blue" />
+
+			</tr>
+			<br></br>
+			<tr>
+				<td><h:outputLabel>Goles</h:outputLabel></td>
+				<td><h:inputText value="#{goalscorerBean.goalscorer.goals}" 
+						 required="true"
+						requiredMessage="Campo de Correo Electrónico obligatorio"
+						id="txtGoles"></h:inputText></td>
+				<h:message for="txtGoles" errorStyle="color:red"></h:message>
+			</tr>
+			<tr>
+				<td><h:outputLabel>Foto</h:outputLabel></td>
+				<td align="center"><h:inputText
+						value="#{goalscorerBean.goalscorer.photo}"></h:inputText></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel>Equipo</h:outputLabel></td>
+				<td align="center"><h:inputText
+						value="#{goalscorerBean.goalscorer.team}"></h:inputText></td>
+			</tr>
+			<tr>
+
+				<h:commandButton value="Guardar Modificacion" action="#{goalscorerBean.modificarGoleador}"></h:commandButton>
+
+			</tr>
+		</h:form>
+	</table>
+</h:body>
+</html>

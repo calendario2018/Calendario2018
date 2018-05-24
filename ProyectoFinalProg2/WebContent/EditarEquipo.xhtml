@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+
+</h:head>
+
+
+<h:body>
+
+
+
+	<table border="2" align="center">
+		<h:form>
+			<tr>
+
+				<td colspan="2" align="center"><h1>Equipo</h1></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel>Ciudad</h:outputLabel></td>
+				<td><h:inputText value="#{teamBean.team.country}"
+						required="true"
+						requiredMessage="Campo de Nombre Completo obligatorio"
+						id="txtCiudad"></h:inputText></td>
+				<h:message for="txtCiudad" errorStyle="color:blue" />
+
+			</tr>
+			<br></br>
+			<tr>
+				<td><h:outputLabel>Bandera</h:outputLabel></td>
+				<td><h:inputText value="#{teamBean.team.flag}" 
+						 required="true"
+						requiredMessage="Campo de Correo Electrónico obligatorio"
+						id="txtBandera"></h:inputText></td>
+				<h:message for="txtBandera" errorStyle="color:red"></h:message>
+			</tr>
+			<tr>
+				<td><h:outputLabel>Goles en contra</h:outputLabel></td>
+				<td align="center"><h:inputText
+						value="#{teamBean.team.goalsFavor}"></h:inputText></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel>Goles a favor</h:outputLabel></td>
+				<td align="center"><h:inputText
+						value="#{teamBean.team.goalsAgainst}"></h:inputText></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel>Grupo</h:outputLabel></td>
+				<td align="center"><h:inputText
+						value="#{teamBean.team.group}"></h:inputText></td>
+			</tr>
+			
+			<tr>
+				<td><h:outputLabel>Partidos perdidos</h:outputLabel></td>
+				<td align="center"><h:inputText
+						value="#{teamBean.team.lostMatches}"></h:inputText></td>
+			</tr>
+			
+			<tr>
+				<td><h:outputLabel>Partidos jugados</h:outputLabel></td>
+				<td align="center"><h:inputText
+						value="#{teamBean.team.playedGames}"></h:inputText></td>
+			</tr>
+			
+			<tr>
+				<td><h:outputLabel>Estado</h:outputLabel></td>
+				<td align="center"><h:inputText
+						value="#{teamBean.team.state}"></h:inputText></td>
+			</tr>
+			
+			<tr>
+				<td><h:outputLabel>Partidos empatados</h:outputLabel></td>
+				<td align="center"><h:inputText
+						value="#{teamBean.team.tiedMatches}"></h:inputText></td>
+			</tr>
+			
+			<tr>
+				<td><h:outputLabel>Partidos ganados</h:outputLabel></td>
+				<td align="center"><h:inputText
+						value="#{teamBean.team.wonMatches}"></h:inputText></td>
+			</tr>
+			
+			<tr>
+
+				<h:commandButton value="Guardar Modificacion" action="#{teamBean.modificarTeam}"></h:commandButton>
+
+			</tr>
+		</h:form>
+	</table>
+</h:body>
+</html>

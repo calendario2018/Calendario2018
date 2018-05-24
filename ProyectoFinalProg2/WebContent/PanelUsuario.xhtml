@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head>
+
+	<h:outputStylesheet library="css" name="PaginaPrincipal.css"></h:outputStylesheet>
+	<style>
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.highlight {
+	background: none;
+}
+
+.table2 {
+	background-color: blue;
+	color: rgb(210, 195, 115);
+}
+
+/* Style the header */
+.header {
+	padding: 30px;
+	text-align: center;
+	font-size: 35px;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+	float: left;
+	padding: 10px;
+	height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+
+/* Style the footer */
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media ( max-width : 600px) {
+	.column.side, .column.middle {
+		width: 100%;
+	}
+}
+</style>
+
+</h:head>
+
+
+<h:body>
+
+	<div class="header"
+		style="height: 240px; background-color: rgba(253, 132, 132, 0.5); padding: 0px">
+		<p:graphicImage name="./images/Portada2.png"
+			style="width:100%; margin-left:0px;" />
+
+
+
+	</div>
+	<h:form>
+		<p:growl id="messages" />
+		<p:menubar id="menubar" styleClass="ui-state-hover">
+			<p:menuitem value="Inicio" icon="ui-icon-home"></p:menuitem>
+			<f:facet name="options">
+
+
+				<h:commandButton value="Cerrar Sesión"
+					action="PaginaPrincipal.xhtml"></h:commandButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+
+
+
+	<p:tabView orientation="top"
+		style="background-color:rgba(229,217,137,0.2)">
+
+		<p:tab title="Ver Estadios">
+			<h:panelGrid columns="1" cellpadding="10">
+				<div class="header">
+
+					<p:contentFlow value="#{imagesView.images}" var="image">
+						<p:graphicImage name="./images/#{image}" styleClass="content" />
+						<div class="caption">¡¡¡MUNDIAL RUSIA 2018!!!</div>
+					</p:contentFlow>
+
+				</div>
+
+
+				<p:dataTable id="table2" var="stadium" rowStyleClass="highlight"
+					value="#{stadiumBean.filtrados}" rows="4" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5, 10">
+
+
+					<p:column headerText="Capacidad">
+						<h:outputText value="#{stadium.capacity}" />
+					</p:column>
+
+					<p:column headerText="Ciudad">
+						<h:outputText value="#{stadium.city}" />
+					</p:column>
+
+
+					<p:column headerText="Población">
+						<h:outputText value="#{stadium.population}" />
+					</p:column>
+
+					<p:column headerText="Temperatura">
+						<h:outputText value="#{stadium.temperature}" />
+					</p:column>
+
+				</p:dataTable>
+
+			</h:panelGrid>
+		</p:tab>
+
+
+		<p:tab title="verTablaArbitros">
+			<h:panelGrid columns="1" cellpadding="10">
+
+				<p:dataTable id="table1" var="referee"
+					value="#{refereeBean.listaReferes}" rows="5" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5, 10">
+
+					<p:column headerText="Nombre Completo">
+						<h:outputText value="#{referee.fullName}" />
+					</p:column>
+
+					<p:column headerText="Nacionalidad">
+						<h:outputText value="#{referee.nationality}" />
+					</p:column>
+
+				</p:dataTable>
+			</h:panelGrid>
+		</p:tab>
+
+
+		<p:tab title="Cambiar Informacion de la cuenta">
+			<h:panelGrid columns="1" cellpadding="10">
+				<p:panel id="panel" header="Configurar informacion personal"
+					style="margin-left:450px">
+
+					<p:messages id="mensaje1" />
+
+					<h:panelGrid columns="">
+						<p:outputLabel value="Nombre:" />
+						<p:inputText value="#{userBean.usuarioLogin.usuario.fullName}" required="true"
+							requiredMessage="Campo de Nombre Completo obligatorio"
+							id="txtNombre"></p:inputText>
+
+
+						<p:outputLabel value="Correo:" />
+						<p:inputText value="#{userBean.usuarioLogin.usuario.emailAddress}" required="true"
+							requiredMessage="Campo de Correo Electrónico obligatorio"
+							id="txtCorreo">
+						</p:inputText>
+
+
+						<p:outputLabel value="Contraseña actual:" />
+						<p:inputText>
+						</p:inputText>
+
+
+						<p:outputLabel value="Contraseña Nueva:" />
+						<p:inputText>
+						</p:inputText>
+
+
+						<p:outputLabel value="Confirmacion contraseña:" />
+						<p:inputText>
+						</p:inputText>
+
+
+						<p:outputLabel value="Telefono:" />
+						<p:inputText value="#{userBean.usuarioLogin.usuario.phoneNumber}" required="true"
+							requiredMessage="Campo del telefono es obligatorio">
+						</p:inputText>
+
+
+						<h:form>
+							<h:commandButton value="Modificar Informacion"
+								action="#{userBean.modificarUsuario}" update="panel"></h:commandButton>
+						</h:form>
+
+					</h:panelGrid>
+				</p:panel>
+			</h:panelGrid>
+
+
+
+		</p:tab>
+		<p:tab title="Goleadores">
+			<h:panelGrid columns="1" cellpadding="10">
+				<div class="header">
+
+					<p:contentFlow value="#{imagenesView2.images}" var="imagen">
+						<p:graphicImage name="./images/#{imagen}" styleClass="content" />
+						<div class="caption">Goleadores del momento</div>
+					</p:contentFlow>
+
+				</div>
+
+
+				<p:dataTable id="table3" var="pajaro" rowStyleClass="highlight"
+					value="#{goalscorerBean.listaGoleadores}" rows="4" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5, 10">
+
+
+					<p:column headerText="Nombre">
+						<h:outputText value="#{pajaro.fullName}" />
+					</p:column>
+
+					<p:column headerText="Equipo">
+						<h:outputText value="#{pajaro.team}" />
+					</p:column>
+
+
+					<p:column headerText="Goles">
+						<h:outputText value="#{pajaro.goals}" />
+					</p:column>
+
+
+				</p:dataTable>
+
+			</h:panelGrid>
+		</p:tab>
+		<p:tab title="Calendario">
+		<h:panelGrid columns="1" cellpadding="10">
+			<div class="header">
+				<iframe
+					src="https://calendar.google.com/calendar/b/2/embed?height=350&amp;wkst=1&amp;hl=es_419&amp;bgcolor=%23ffffff&amp;src=tjaj2g3mntct23kmksg5glgqr8%40group.calendar.google.com&amp;color=%23875509&amp;ctz=America%2FBogota"
+					style="border-width: 0" width="550" height="450" frameborder="0"
+					scrolling="no"></iframe>
+
+			</div>
+
+		</h:panelGrid>
+
+	</p:tab>
+	</p:tabView>
+	
+
+</h:body>
+</html>

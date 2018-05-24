@@ -1,0 +1,36 @@
+form{
+	 width: 30%;
+    margin: 0 auto;
+    padding: 2px;
+    justify-content: center;
+    align-items: center;
+    align-content: center; 
+    border-radius: 30px;
+ margin-left: 36%;
+ margin-top: 200px;
+ justify-content: center;
+
+ 
+}
+
+
+body{
+    background-image:
+		url(https://images.vexels.com/media/users/3/145220/preview2/d46f6c3c236102eaf3f921455ca642f8-rusia-2018-copa-del-mundo-de-fondo.jpg);
+		  background-attachment: scroll;
+		  background-size: 100%;
+    background-repeat: no-repeat
+        
+}
+input {
+
+   width: 100%;
+    padding: 4px;
+    box-sizing: border-box;
+    border: 5px solid bc5fe5;
+     border-radius: 30px;
+}
+
+.panel{
+	background-color: rgb(210,195,115);
+}

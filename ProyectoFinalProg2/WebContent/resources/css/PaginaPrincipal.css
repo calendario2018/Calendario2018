@@ -1,0 +1,42 @@
+body {
+	background-color: azure;
+	background-image:
+		url(https://previews.123rf.com/images/badwiser/badwiser1711/badwiser171100007/89555335-russian-gold-wallpaper-world-of-russia-pattern-with-modern-and-traditional-elements-2018-background-.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-position: center;
+	background-color: #66999;
+}
+
+input{
+
+	box-sizing: border-box;
+	border: 5px solid bc5fe5;
+	padding: 4px;
+	border-radius: 10px;
+	background-color: rgb(223,25,25);
+	color: rgb(210,195,115);
+	
+}
+.ui-menubar{
+	background: rgb(210,195,115);
+	border-radius: 15px;
+}
+
+.ui-state-hover:hover{
+    background-color:  rgb(229,217,137);
+    cursor: pointer;
+}
+
+input:hover{
+    background-color:  rgb(246,77,77);
+    cursor: pointer;
+}
+
+
+.ui-layout{
+	min-width: 400px;
+	min-height: 900px;
+
+}

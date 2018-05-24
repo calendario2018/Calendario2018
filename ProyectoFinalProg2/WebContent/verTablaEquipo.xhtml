@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Gestión de Equipo</title>
+</h:head>
+<h:body>
+	<h1>Listado de Equipo</h1>
+	<h:dataTable value="#{teamBean.listaEquipos}" var="equipo">
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Id" />
+			</f:facet>
+			<h:outputText value="#{equipo.id}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Country" />
+			</f:facet>
+			<h:outputText value="#{equipo.country}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Flag" />
+			</f:facet>
+			<h:outputText value="#{equipo.flag}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="goalsAgainst" />
+			</f:facet>
+			<h:outputText value="#{equipo.goalsAgainst}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="goalsFavor" />
+			</f:facet>
+			<h:outputText value="#{equipo.goalsFavor}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="group" />
+			</f:facet>
+			<h:outputText value="#{equipo.group}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="lostMatches" />
+			</f:facet>
+			<h:outputText value="#{equipo.lostMatches}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="playedGames" />
+			</f:facet>
+			<h:outputText value="#{equipo.playedGames}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="state" />
+			</f:facet>
+			<h:outputText value="Activo" rendered="#{'A' eq equipo.state}" />
+			<h:outputText value="InActivo" rendered="#{'I' eq equipo.state}" />
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="tiedMatches" />
+			</f:facet>
+			<h:outputText value="#{equipo.tiedMatches}" />
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="wonMatches" />
+			</f:facet>
+			<h:outputText value="#{equipo.wonMatches}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Modificar" />
+			</f:facet>
+			<h:form>
+				<h:commandButton action="#{teamBean.prepararModificarTeam}"
+					value="Modificar" />
+			</h:form>
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Eliminar" />
+			</f:facet>
+			<h:form>
+				<h:commandButton action="#{teamBean.eliminarTeam}"
+					value="Eliminar"></h:commandButton>
+					
+			</h:form>
+		</h:column>
+	</h:dataTable>
+	<h:form><h:commandButton action="panelAdmin.xhtml"
+					value="Volver"></h:commandButton></h:form>
+	
+	<br />
+</h:body>
+</html>

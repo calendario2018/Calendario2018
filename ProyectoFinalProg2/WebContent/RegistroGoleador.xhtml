@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<h:outputStylesheet library="css" name="Registro.css"></h:outputStylesheet>
+</h:head>
+
+
+<h:body>
+
+	<h:form>
+		<p:panel id="panel" header="Registro"
+			styleClass="panel">
+
+			<p:messages id="msgs" />
+
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Goleador:" />
+				<p:inputText value="#{goalscorerBean.goalscorer.fullName}"
+					required="true" requiredMessage="Campo de Goleador obligatorio"
+					id="txtNombre"></p:inputText>
+
+
+				<p:outputLabel value="Goles:" />
+				<p:inputText value="#{goalscorerBean.goalscorer.goals}"
+					required="true" requiredMessage="Campo de Goles obligatorio"
+					id="txtCorreo">
+
+				</p:inputText>
+
+				<p:outputLabel value="Foto:" />
+				<p:inputText value="#{goalscorerBean.goalscorer.photo}">
+					
+						<p:growl id="messages" showDetail="true" />
+
+						<p:fileUpload value="#{fileUploadView.file}" mode="simple"
+							skinSimple="true" />
+
+						<p:commandButton value="Submit" ajax="false"
+							actionListener="#{fileUploadView.upload}" disabled="true" />
+				</p:inputText>
+
+
+				<p:outputLabel value="Equipo:" />
+				<p:inputText value="#{goalscorerBean.goalscorer.team}"
+					required="true" requiredMessage="Campo de Equipo obligatorio">
+				</p:inputText>
+
+
+				<h:commandButton value="Agregar Goleador"
+					action="#{goalscorerBean.adicionarGoleador}"></h:commandButton>
+
+
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+
+</h:body>
+</html>

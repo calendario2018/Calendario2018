@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+<h:outputStylesheet library="css" name="Registro.css"></h:outputStylesheet>
+</h:head>
+
+
+<h:body>
+
+	<h:form>
+		<p:panel id="panel" header="Registro"
+			styleClass="panel">
+
+			<p:messages id="msgs" />
+
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Capacidad:" />
+				<p:inputText value="#{stadiumBean.stadium.capacity}" required="true"
+					requiredMessage="Campo de Capacidad obligatorio"
+					id="txtNombre"></p:inputText>
+
+
+				<p:outputLabel value="Ciudad:" />
+				<p:inputText value="#{stadiumBean.stadium.city}" required="true"
+					requiredMessage="Campo de Ciudad obligatorio"
+					id="txtCorreo">
+
+				</p:inputText>
+
+				<p:outputLabel value="Foto:" />
+				<p:inputText value="#{stadiumBean.stadium.photo}">
+				</p:inputText>
+
+
+				<p:outputLabel value="Población:" />
+				<p:inputText value="#{stadiumBean.stadium.population}"
+					required="true" requiredMessage="Campo de Población obligatorio">
+				</p:inputText>
+
+				<p:outputLabel value="Temperatura:" />
+				<p:inputText value="#{stadiumBean.stadium.temperature}"
+					required="true" requiredMessage="Campo de Temperatura obligatorio">
+				</p:inputText>
+
+
+				<h:commandButton value="Agregar Estadio"
+					action="#{stadiumBean.adicionarEstadio}"></h:commandButton>
+
+
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

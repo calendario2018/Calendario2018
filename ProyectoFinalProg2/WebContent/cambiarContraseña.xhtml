@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+
+	<h:outputStylesheet library="css" name="Registro.css"></h:outputStylesheet>
+
+
+</h:head>
+<h:body>
+<h:form id="form">
+    <p:panel id="panel" header="Cambiar Password" style="margin-bottom:10px; ">
+        <p:messages id="msgs" />
+        <h:panelGrid columns="1">
+            <p:outputLabel for="username" value="Username:" />
+            <p:inputText id="username" value="#{userBean.usuario}" required="false" label="Username">
+                <f:validateLength minimum="2" />
+            </p:inputText>
+            <p:message for="username" display="icon" />
+ 
+            <p:outputLabel for="password" value="Antiguo Password:" />
+            <p:inputText id="password" value="#{userBean.password}" required="false" label="Password">
+            <f:validateLength minimum="1"/>
+            </p:inputText>
+            <p:message for="password" display="icon" />
+            
+            
+           <p:outputLabel for="lastPassword" value="Nueva Password:" />
+            <p:inputText id="lastPassword" value="#{userBean.lastPassword}" required="false" label="lastPassword">
+                <f:validateLength minimum="2" />
+            </p:inputText>
+            <p:message for="lastPassword" display="icon" />
+ 
+            <p:outputLabel for="confLastPassword" value="Confirmar Nueva Password:" />
+            <p:inputText id="confLastPassword" value="#{userBean.confLastPassword}" required="false" label="confLastPassword">
+            <f:validateLength minimum="1"/>
+            </p:inputText>
+            <p:message for="password" display="icon" />
+
+
+           
+          </h:panelGrid>
+          
+    </p:panel>
+ 
+    <p:toolbar>
+        <f:facet name="left">
+            <p:commandButton value="Cambiar" update="panel" action="#{userBean.cambiarPassword}" style="margin-right:20px;"  />
+            <p:commandButton value="Volver" update="panel" action="Login.xhtml" style="margin-right:20px;"  />
+   
+        </f:facet>
+        
+    </p:toolbar>
+  </h:form>
+
+
+
+
+
+</h:body>
+</html>

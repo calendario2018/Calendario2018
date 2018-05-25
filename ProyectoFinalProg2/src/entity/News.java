@@ -11,7 +11,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="news")
-public class New implements Serializable {
+public class News implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
@@ -27,7 +27,7 @@ public class New implements Serializable {
 
 	private String state;
 
-	public New() {
+	public News() {
 	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

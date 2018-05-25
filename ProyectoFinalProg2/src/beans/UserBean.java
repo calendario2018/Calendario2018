@@ -48,17 +48,26 @@ public class UserBean {
 	private boolean off;
 public String cambiarPassword(){
 	UserDao dao= new UserDaoImpl();
+	if(listaValidar.get(0).getPassword().equals(getStringMessageDigest(password, MD5))){
 	if (lastPassword.equals(confLastPassword)){
 		User userTemp= listaValidar.get(0);
 		userTemp.setPassword(getStringMessageDigest(lastPassword, MD5));
 		userTemp.setUserType("usuario");
 		dao.update(userTemp);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se cambio correctamente la contraseña"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se cambio correctamente la Clave"));
+		password="";
+		
 	
 		return "Login.xhtml";
-	}else{
+	}
+	else{
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
-				"Las contraseñas no coinciden ", "Las contraseñas no coinciden"));
+				"Las Claves no coinciden ", "Las Claves no coinciden"));
+		return "cambiarContraseña.xhtml";
+	}}
+	else{
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+				"Esa Clave no es la clave antigua", "Esa Clave no es la clave antigua"));
 		return "cambiarContraseña.xhtml";
 	}
 	
@@ -314,6 +323,7 @@ public String cambiarPassword(){
 				else if(listaValidar.get(0).getUserType().equals("nuevo")){
 					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
 							"Se necesita cambiar la contraseña por primera vez ", "Se necesita cambiar la contraseña por primera vez"));
+					password="";
 						rta= "cambiarContraseña.xhtml";
 					}
 

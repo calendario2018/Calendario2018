@@ -52,6 +52,7 @@ body {
 		width: 100%;
 	}
 }
+
 </style>
 
 </h:head>
@@ -85,6 +86,70 @@ body {
 	<p:tabView orientation="top"
 		style="background-color:rgba(229,217,137,0.2)">
 
+	<p:tab title="Noticias">
+
+			
+				<h:form>    
+		     
+    <p:commandButton value="Nueva Noticia" oncomplete="PF('dlg').show();"  action="#{newBean.prepararAdicionarNoticia}" update="growl"  />
+    
+    
+   
+    
+ 
+ 
+    <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+ </h:form>
+ <h:form>
+    <p:dialog header="Nueva Noticia" widgetVar="dlg" resizable="false">
+        <h:panelGrid columns="2" cellpadding="5">
+            
+  <h:outputLabel for="ShortDescription" value="Descripcion Corta" />
+            <p:inputText id="shortDescription1" value="#{newBean.news.shortDescription}"    />
+            
+            <h:outputLabel for="largeDescription" value="Descripcion Larga" />
+            <p:inputText id="largeDescription1" value="#{newBean.news.largeDescription}"    />
+ 
+            <f:facet name="footer">
+                <p:commandButton value="Nuevo" action="#{newBean.adicionarNoticia}"
+                                 onclick="handleLoginRequest(xhr, status, args)" />
+            </f:facet>  
+        </h:panelGrid>
+    </p:dialog>
+</h:form>
+
+			
+			<br></br>
+			<br></br>
+			<br></br>
+			<br></br>
+
+					<h:form> 
+    <p:dataScroller value="#{newBean.listaNoticias}" var="noticia" chunkSize="10">
+        <f:facet name="header">
+          Noticias mas recientes
+        </f:facet>
+ 
+        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+           
+ 
+            <p:outputPanel>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputText value="dateNews" />
+                    <h:outputText value="#{noticia.dateNews}" style="font-weight: bold"/>
+ 
+                    <h:outputText value="shortDescription" />
+                    <h:outputText value="#{noticia.shortDescription}" style="font-weight: bold"/>
+ 
+                    <h:outputText value="largeDescription" />
+                    <h:outputText value="#{noticia.largeDescription}" style="font-weight: bold"/>
+                    <br></br>
+                </h:panelGrid>
+            </p:outputPanel>
+        </h:panelGrid>
+    </p:dataScroller>
+</h:form>
+		</p:tab>
 
 		<p:tab title="Arbitros">
 

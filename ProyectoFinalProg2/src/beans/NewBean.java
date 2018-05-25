@@ -1,5 +1,6 @@
 package beans;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -7,59 +8,64 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
-import dao.NewDao;
-import impl.NewDaoImpl;
-import entity.New;
+import dao.NewsDao;
+import impl.NewsDaoImpl;
+import entity.News;
 
 @ManagedBean
 @SessionScoped
 public class NewBean
 {
-	private New noticia;
-	private DataModel<New> listaNoticias;
+	private News news;
+	private DataModel<News> listaNoticias;
 	public String prepararAdicionarNoticia(){
-		noticia = new New();
-		noticia.setState("Activo");
-		return "userRegister";
+		news = new News();
+		news.setState("A");
+		Date date = new Date();
+		date.getTime();
+		news.setDateNews(date);
+		news.setIdUser(1);
+		return "panelAdmin.xhtml";
+		
 	}
 	public String prepararModificarNoticia(){
-		noticia= (New) (listaNoticias.getRowData());
+		news= (News) (listaNoticias.getRowData());
 		return "userRegister";
 	}
 	public String eliminarNoticia(){
-		New noticiaTemp = (New) (listaNoticias.getRowData());
-		NewDao dao= new NewDaoImpl();
+		News noticiaTemp = (News) (listaNoticias.getRowData());
+		NewsDao dao= new NewsDaoImpl();
 		noticiaTemp.setState("Inactivo");
 		dao.update(noticiaTemp);
 		return "listaUsuarios";
 	}
-	public String adicionarNoticia(){
-		NewDao dao= new NewDaoImpl();
-		dao.save(noticia);
-		return "listarUsuarios";
+	public String adicionarNoticia(){	
+		
+		NewsDao dao= new NewsDaoImpl();
+		dao.save(news);
+		return "";
 	}
 	public String modificarNoticia(){
-		NewDao dao= new NewDaoImpl();
-		dao.update(noticia);
+		NewsDao dao= new NewsDaoImpl();
+		dao.update(news);
 		return "listarUsuarios";
 
 	}
-	public New getNoticia(){
-		return noticia;
+
+	public News getNews() {
+		return news;
 	}
-	public void setNoticia(New noticia){
-		this.noticia= noticia;
+	public void setNews(News news) {
+		this.news = news;
 	}
-	public DataModel<New> getListarNoticias(){
-		List<New> lista= new NewDaoImpl().list();
-		listaNoticias= new ListDataModel<New>(lista);
+	public DataModel<News> getListaNoticias(){
+		List<News> lista= new NewsDaoImpl().list();
+		listaNoticias= new ListDataModel<News>(lista);
 		return listaNoticias;
 
 	}
-	public DataModel<New> getListaNoticias() {
-		return listaNoticias;
-	}
-	public void setListaNoticias(DataModel<New> listaNoticias) {
+	
+	public void setListaNoticias(DataModel<News> listaNoticias) {
 		this.listaNoticias = listaNoticias;
 	}
 }

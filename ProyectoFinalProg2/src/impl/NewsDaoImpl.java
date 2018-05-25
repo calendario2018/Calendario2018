@@ -6,14 +6,14 @@ import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import dao.NewDao;
-import entity.New;
+import dao.NewsDao;
+import entity.News;
 import util.HibernateUtil;
 
-public class NewDaoImpl implements NewDao {
+public class NewsDaoImpl implements NewsDao {
 
 	@Override
-	public void save(New news) {
+	public void save(News news) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		session.save(news);
@@ -22,13 +22,13 @@ public class NewDaoImpl implements NewDao {
 	}
 
 	@Override
-	public New getNew(int id) {
+	public News getNew(int id) {
 		Session session= HibernateUtil.getSessionFactory().openSession();
-		return (New) session.load(New.class, id);
+		return (News) session.load(News.class, id);
 	}
 
 	@Override
-	public List<New> list() {
+	public List<News> list() {
 		Session session =  HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		List lista= session.createQuery("from News").list();
@@ -37,7 +37,7 @@ public class NewDaoImpl implements NewDao {
 	}
 
 	@Override
-	public void remove(New news) {
+	public void remove(News news) {
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Transaction t= session.beginTransaction();
 	session.delete(news);
@@ -46,7 +46,7 @@ public class NewDaoImpl implements NewDao {
 	}
 
 	@Override
-	public void update(New news) {
+	public void update(News news) {
 		Session session= HibernateUtil.getSessionFactory().openSession();
 		Transaction t= session.beginTransaction();
 		session.update(news);

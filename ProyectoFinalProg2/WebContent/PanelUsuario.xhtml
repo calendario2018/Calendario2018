@@ -85,6 +85,34 @@ body {
 	<p:tabView orientation="top"
 		style="background-color:rgba(229,217,137,0.2)">
 
+
+<p:tab title="Noticias">
+			<h:form> 
+    <p:dataScroller value="#{newBean.listaNoticias}" var="noticia" chunkSize="10">
+        <f:facet name="header">
+          Noticias mas recientes
+        </f:facet>
+ 
+        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+           
+ 
+            <p:outputPanel>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputText value="dateNews" />
+                    <h:outputText value="#{noticia.dateNews}" style="font-weight: bold"/>
+ 
+                    <h:outputText value="shortDescription" />
+                    <h:outputText value="#{noticia.shortDescription}" style="font-weight: bold"/>
+ 
+                    <h:outputText value="largeDescription" />
+                    <h:outputText value="#{noticia.largeDescription}" style="font-weight: bold"/>
+                </h:panelGrid>
+            </p:outputPanel>
+        </h:panelGrid>
+    </p:dataScroller>
+</h:form>
+		</p:tab>
+
 		<p:tab title="Ver Estadios">
 			<h:panelGrid columns="1" cellpadding="10">
 				<div class="header">
@@ -126,7 +154,7 @@ body {
 		</p:tab>
 
 
-		<p:tab title="verTablaArbitros">
+		<p:tab title="Ver Arbitros">
 			<h:panelGrid columns="1" cellpadding="10">
 
 				<p:dataTable id="table1" var="referee"
@@ -145,9 +173,10 @@ body {
 				</p:dataTable>
 			</h:panelGrid>
 		</p:tab>
+		
 
 
-		<p:tab title="Cambiar Informacion de la cuenta">
+		<p:tab title="Gestionar Cuenta">
 			<h:panelGrid columns="1" cellpadding="10">
 				<p:panel id="panel" header="Configurar informacion personal"
 					style="margin-left:450px">
@@ -201,7 +230,7 @@ body {
 
 
 		</p:tab>
-		<p:tab title="Goleadores">
+		<p:tab title="Ver Goleadores">
 			<h:panelGrid columns="1" cellpadding="10">
 				<div class="header">
 
@@ -237,7 +266,7 @@ body {
 
 			</h:panelGrid>
 		</p:tab>
-		<p:tab title="Calendario">
+		<p:tab title="Ver Calendario">
 		<h:panelGrid columns="1" cellpadding="10">
 			<div class="header">
 				<iframe

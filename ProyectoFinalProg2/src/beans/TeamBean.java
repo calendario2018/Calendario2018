@@ -16,6 +16,7 @@ import impl.TeamDaoImpl;
 @SessionScoped
 public class TeamBean {
 
+	
 	private Team team;
 	private DataModel<Team> listaEquipos;
 

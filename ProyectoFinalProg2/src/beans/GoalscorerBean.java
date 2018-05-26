@@ -16,6 +16,7 @@ import impl.GoalscorerDaoImpl;
 public class GoalscorerBean {
 
 	
+	
 	private Goalscorer goalscorer;
 	private DataModel<Goalscorer> listaGoalscorer;
 

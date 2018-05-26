@@ -18,6 +18,7 @@ import impl.UserDaoImpl;;
 @SessionScoped
 public class StadiumBean {
 
+	
 	private Stadium stadium;
 	private DataModel<Stadium> listaEstadios;
 

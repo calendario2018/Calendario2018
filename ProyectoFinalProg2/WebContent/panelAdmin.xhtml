@@ -614,6 +614,7 @@ body {
 
 
 		</p:tab>
+		
 
 		<p:tab title="Calendario">
 			<h:panelGrid columns="1" cellpadding="10">
@@ -765,6 +766,97 @@ body {
 			
 			</h:form>
 		</p:tab>
+			
+		<p:tab title="Parametros">
+			<p:dataTable id="tableParameter" var="parameter"
+				value="#{parameterBean.listaParameter}" rows="5" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5, 10">
+				<p:column headerText="Id">
+					<h:outputText value="#{parameter.id}" />
+				</p:column>
+
+				<p:column headerText="Tipo del Parameter">
+					<h:outputText value="#{parameter.parameterType}" />
+				</p:column>
+
+				<p:column headerText="Codigo del Parametro">
+					<h:outputText value="#{parameter.parameterCode}" />
+				</p:column>
+
+				<p:column headerText="Descripcion del parametro">
+					<h:outputText value="#{parameter.descriptionParameter}" />
+				</p:column>
+				<p:column headerText="Valor del Texto">
+					<h:outputText value="#{parameter.textValue}" />
+				</p:column>
+				<p:column headerText="Numero del valor">
+					<h:outputText value="#{parameter.numberValue}" />
+				</p:column>
+				<p:column headerText="Modificar">
+								    
+		     
+    <p:commandButton value="Modificar" oncomplete="PF('dlgEdit').show();" action="#{parameterBean.prepararModificarParameter}" update="dialogMod"/>
+    	
+   
+    
+    
+   
+    
+ 
+ 
+    <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+ 
+ 
+    <p:dialog id="dialogMod" header="Modificar Parameter" widgetVar="dlgEdit" resizable="false">
+        <h:panelGrid columns="2" cellpadding="5">
+            
+  <h:outputLabel for="id" value="id" />
+            <p:inputText id="id" value="#{parameterBean.parameter.id}"    />
+            
+            <h:outputLabel for="TipodeParametros" value="Tipo de Parametros" />
+            <p:inputText id="TipodeParametros" value="#{parameterBean.parameter.parameterType}"    />
+            
+  <h:outputLabel for="parameterCode" value="Codigo del parametro" />
+            <p:inputText id="parameterCode" value="#{parameterBean.parameter.parameterCode}"    />
+            
+            <h:outputLabel for="descriptionParameter" value="Descripcion del Parametro" />
+            <p:inputText id="largeDescription1" value="#{parameterBean.parameter.descriptionParameter}"    />
+            
+  <h:outputLabel for="textValue" value="Valor del Texto" />
+            <p:inputText id="textValue" value="#{parameterBean.parameter.textValue}"    />
+            
+            <h:outputLabel for="numberValue" value="Numero del Valor" />
+            <p:inputText id="numberValue" value="#{parameterBean.parameter.numberValue}"    />
+ 
+            <f:facet name="footer">
+                <p:commandButton value="Modificar" action="#{parameterBean.modificarParameter}"
+                                 onclick="handleLoginRequest(xhr, status, args)" />
+            </f:facet>  
+        </h:panelGrid>
+    </p:dialog>
+    
+				</p:column>
+				
+
+			
+
+
+
+
+				<f:facet name="paginatorTopLeft">
+					<p:commandButton type="button" icon="fa fa-sync" />
+				</f:facet>
+
+				<f:facet name="paginatorBottomRight">
+					<p:commandButton type="button" icon="fa fa-cloud-upload" />
+				</f:facet>
+			</p:dataTable>
+			<h:form>
+			
+			</h:form>
+		</p:tab>
+		
 
 
 	</p:tabView>

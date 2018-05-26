@@ -21,7 +21,7 @@ public class GoalscorerBean {
 
 	public String prepararAdicionarGoleador() {
 		goalscorer = new Goalscorer();
-		return "RegistroGoleador";
+		return "panelAdmin.xhtml";
 	}
 
 	public String prepararModificarGoleador() {

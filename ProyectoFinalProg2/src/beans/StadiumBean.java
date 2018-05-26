@@ -28,7 +28,7 @@ public class StadiumBean {
 
 	public String prepararAdicionarEstadio() {
 		stadium = new Stadium();
-		return "RegistroEstadio";
+		return "panelAdmin.xhtml";
 	}
 
 	public String prepararModificarEstadio() {

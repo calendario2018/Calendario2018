@@ -22,7 +22,7 @@ public class TeamBean {
 	public String prepararAdicionarTeam() {
 		team = new Team();
 		team.setState("A");
-		return "RegistrarEquipo";
+		return "panelAdmin.xhtml";
 	}
 
 	public String prepararModificarTeam() {

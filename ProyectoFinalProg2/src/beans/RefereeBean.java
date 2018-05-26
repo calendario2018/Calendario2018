@@ -21,7 +21,7 @@ public class RefereeBean {
 	{
 		referee = new Referee();
 		referee.setState("Activo");
-		return "userRegister";
+		return "panelAdmin.xhtml";
 	}
 
 	public String prepararModificarReferee() 

@@ -19,6 +19,7 @@ import impl.UserDaoImpl;;
 public class StadiumBean {
 
 	
+	
 	private Stadium stadium;
 	private DataModel<Stadium> listaEstadios;
 

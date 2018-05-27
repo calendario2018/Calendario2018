@@ -18,6 +18,8 @@ import impl.UserDaoImpl;;
 @SessionScoped
 public class StadiumBean {
 
+	
+	
 	private Stadium stadium;
 	private DataModel<Stadium> listaEstadios;
 
@@ -28,7 +30,7 @@ public class StadiumBean {
 
 	public String prepararAdicionarEstadio() {
 		stadium = new Stadium();
-		return "RegistroEstadio";
+		return "panelAdmin.xhtml";
 	}
 
 	public String prepararModificarEstadio() {

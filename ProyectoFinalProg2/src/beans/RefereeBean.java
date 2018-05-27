@@ -16,12 +16,14 @@ import entity.Referee;
 public class RefereeBean {
 	private Referee referee;
 	private DataModel<Referee> listaReferes;
-
+ 
+	
+	
 	public String prepararAdicionarReferee()
 	{
 		referee = new Referee();
 		referee.setState("Activo");
-		return "userRegister";
+		return "panelAdmin.xhtml";
 	}
 
 	public String prepararModificarReferee() 

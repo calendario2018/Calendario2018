@@ -16,12 +16,14 @@ import impl.GoalscorerDaoImpl;
 public class GoalscorerBean {
 
 	
+	
+	
 	private Goalscorer goalscorer;
 	private DataModel<Goalscorer> listaGoalscorer;
 
 	public String prepararAdicionarGoleador() {
 		goalscorer = new Goalscorer();
-		return "RegistroGoleador";
+		return "panelAdmin.xhtml";
 	}
 
 	public String prepararModificarGoleador() {

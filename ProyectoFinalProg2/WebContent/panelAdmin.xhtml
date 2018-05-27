@@ -7,6 +7,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
+
 <h:head>
 
 	<h:outputStylesheet library="css" name="PaginaPrincipal.css"></h:outputStylesheet>
@@ -14,6 +15,7 @@
 * {
 	box-sizing: border-box;
 }
+
 
 body {
 	font-family: Arial, Helvetica, sans-serif;
@@ -52,7 +54,6 @@ body {
 		width: 100%;
 	}
 }
-
 </style>
 
 </h:head>
@@ -86,118 +87,110 @@ body {
 	<p:tabView orientation="top"
 		style="background-color:rgba(229,217,137,0.2)">
 
-	<p:tab title="Noticias">
+		<p:tab title="Noticias">
 
-			
-				<h:form>    
-		     
-    <p:commandButton value="Nueva Noticia" oncomplete="PF('dlg').show();"  action="#{newBean.prepararAdicionarNoticia}" update="growl"  />
-    
-    
-   
-    
- 
- 
-    <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
- </h:form>
- <h:form>
-    <p:dialog header="Nueva Noticia" widgetVar="dlg" resizable="false">
-        <h:panelGrid columns="2" cellpadding="5">
-            
-  <h:outputLabel for="ShortDescription" value="Descripcion Corta" />
-            <p:inputText id="shortDescription1" value="#{newBean.news.shortDescription}"    />
-            
-            <h:outputLabel for="largeDescription" value="Descripcion Larga" />
-            <p:inputText id="largeDescription1" value="#{newBean.news.largeDescription}"    />
- 
-            <f:facet name="footer">
-                <p:commandButton value="Nuevo" action="#{newBean.adicionarNoticia}"
-                                 onclick="handleLoginRequest(xhr, status, args)" />
-            </f:facet>  
-        </h:panelGrid>
-    </p:dialog>
-</h:form>
 
-			
-			<br></br>
-			<br></br>
-			<br></br>
-			<br></br>
+			<h:form>
 
-					<h:form> 
-    <p:dataScroller value="#{newBean.listaNoticias}" var="noticia" chunkSize="10">
-        <f:facet name="header">
+				<p:commandButton value="Nueva Noticia"
+					oncomplete="PF('dlg').show();"
+					action="#{newBean.prepararAdicionarNoticia}" update="growl" />
+
+				<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+			</h:form>
+			<h:form>
+				<p:dialog header="Nueva Noticia" widgetVar="dlg" resizable="false">
+					<h:panelGrid columns="2" cellpadding="5">
+
+						<h:outputLabel for="ShortDescription" value="Descripcion Corta" />
+						<p:inputText id="shortDescription1"
+							value="#{newBean.news.shortDescription}" />
+
+						<h:outputLabel for="largeDescription" value="Descripcion Larga" />
+						<p:inputText id="largeDescription1"
+							value="#{newBean.news.largeDescription}" />
+
+						<f:facet name="footer">
+							<p:commandButton value="Nuevo"
+								action="#{newBean.adicionarNoticia}"
+								onclick="handleLoginRequest(xhr, status, args)" />
+						</f:facet>
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
+
+			<h:form>
+				<p:dataScroller value="#{newBean.listaNoticias}" var="noticia"
+					chunkSize="10">
+					<f:facet name="header">
           Noticias mas recientes
         </f:facet>
- 
-        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
-           
- 
-            <p:outputPanel>
-                <h:panelGrid columns="2" cellpadding="5">
-                    <h:outputText value="dateNews" />
-                    <h:outputText value="#{noticia.dateNews}" style="font-weight: bold"/>
- 
-                    <h:outputText value="shortDescription" />
-                    <h:outputText value="#{noticia.shortDescription}" style="font-weight: bold"/>
- 
-                    <h:outputText value="largeDescription" />
-                    <h:outputText value="#{noticia.largeDescription}" style="font-weight: bold"/>
-                    <br></br>
-                </h:panelGrid>
-            </p:outputPanel>
-        </h:panelGrid>
-    </p:dataScroller>
-</h:form>
+
+					<h:panelGrid columns="2" style="width:100%"
+						columnClasses="logo,detail">
+
+
+						<p:outputPanel>
+							<h:panelGrid columns="2" cellpadding="5">
+								<h:outputText value="dateNews" />
+								<h:outputText value="#{noticia.dateNews}"
+									style="font-weight: bold" />
+
+								<h:outputText value="shortDescription" />
+								<h:outputText value="#{noticia.shortDescription}"
+									style="font-weight: bold" />
+
+								<h:outputText value="largeDescription" />
+								<h:outputText value="#{noticia.largeDescription}"
+									style="font-weight: bold" />
+								<br></br>
+							</h:panelGrid>
+						</p:outputPanel>
+					</h:panelGrid>
+				</p:dataScroller>
+			</h:form>
 		</p:tab>
 
 		<p:tab title="Arbitros">
 
-			<p:panelGrid border="2" style="display:block; text-align:center">
-				<h:form>
-					<tr>
 
-						<td colspan="2" align="center"><h1>Arbitro</h1></td>
-					</tr>
-					<tr>
-						<td><h:outputLabel>Nombre</h:outputLabel></td>
-						<td><h:inputText value="#{refereeBean.referee.fullName}"
-								required="true"
-								requiredMessage="Campo de Nombre Completo obligatorio"
-								id="txtRefereeName"></h:inputText></td>
-						<h:message for="txtCapacidad" errorStyle="color:blue" />
-					</tr>
+			<h:form>
 
-					<tr>
-						<td><h:outputLabel>Nacionalidad</h:outputLabel></td>
-						<td><h:inputText value="#{refereeBean.referee.nationality}"
-								required="true"
-								requiredMessage="Campo de la Nacionalidad Completo obligatorio"
-								id="txtRefereeNationality"></h:inputText></td>
-						<h:message for="txtCapacidad" errorStyle="color:blue" />
-					</tr>
-					<tr>
-						<td><h:outputLabel>Estado</h:outputLabel></td>
-						<td><h:inputText value="#{refereeBean.referee.state}"
-								required="true"
-								requiredMessage="Campo del Estado Completo obligatorio"
-								id="tcxtRefereeState"></h:inputText></td>
-						<h:message for="txtCapacidad" errorStyle="color:blue" />
-					</tr>
-					<tr>
+				<p:commandButton value="Nuevo Arbitro"
+					oncomplete="PF('dlgA').show();"
+					action="#{refereeBean.prepararAdicionarReferee}"
+					update="refereeNuevo" />
 
-						<td colspan="2" align="center"><h:commandButton
-								value="Guardar cambios"
-								action="#{stadiumBean.modificarEstadio}"></h:commandButton></td>
+				<p:growl id="refereeNuevo" sticky="true" showDetail="true"
+					life="3000" />
+			</h:form>
+			<h:form>
+				<p:dialog header="Nuevo Arbitro" widgetVar="dlgA" resizable="false">
+					<h:panelGrid columns="2" cellpadding="5">
 
-					</tr>
-				</h:form>
+						<h:outputLabel for="Nombre Completo" value="Nombre Completo" />
+						<p:inputText id="NombreCompleto1"
+							value="#{refereeBean.referee.fullName}" />
 
-			</p:panelGrid>
-			<br></br>
-			<br></br>
-			<br></br>
-			<br></br>
+						<h:outputLabel for="Nacionalidad" value="Nacionalidad" />
+						<p:inputText id="Nacionalidad1"
+							value="#{refereeBean.referee.nationality}" />
+
+						<h:outputLabel for="Estado" value="Estado" />
+						<p:inputText id="Estado1" value="#{refereeBean.referee.state}" />
+
+						<f:facet name="footer">
+							<p:commandButton value="Nuevo Referee"
+								action="#{refereeBean.adicionarReferee}"
+								onclick="handleLoginRequest(xhr, status, args)" />
+						</f:facet>
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
+
+
+
+
 
 			<h:panelGrid columns="1" cellpadding="10">
 
@@ -227,60 +220,56 @@ body {
 				</p:dataTable>
 			</h:panelGrid>
 		</p:tab>
+		
+		
+		
+		
 		<p:tab title="Estadios">
-			<p:panelGrid border="2" style="display:block; text-align:center">
-				<h:form>
-					<tr>
+		
+		
+			<h:form>
 
-						<td colspan="2" align="center"><h1>Estadio</h1></td>
-					</tr>
-					<tr>
-						<td><h:outputLabel>Capacidad</h:outputLabel></td>
-						<td><h:inputText value="#{stadiumBean.stadium.capacity}"
-								required="true"
-								requiredMessage="Campo de Nombre Completo obligatorio"
-								id="txtCapacidad"></h:inputText></td>
-						<h:message for="txtCapacidad" errorStyle="color:blue" />
+				<p:commandButton value="Nuevo Estadio"
+					oncomplete="PF('dlgS').show();"
+					action="#{stadiumBean.prepararAdicionarEstadio}"
+					update="stadiumNuevo" />
 
-					</tr>
-					<br></br>
-					<tr>
-						<td><h:outputLabel>Ciudad</h:outputLabel></td>
-						<td><h:inputText value="#{stadiumBean.stadium.city}"
-								required="true"
-								requiredMessage="Campo de Correo Electrónico obligatorio"
-								id="txtCiudad"></h:inputText></td>
-						<h:message for="txtCiudad" errorStyle="color:red"></h:message>
-					</tr>
-					<tr>
-						<td><h:outputLabel>Foto</h:outputLabel></td>
-						<td align="center"><h:inputText
-								value="#{stadiumBean.stadium.photo}"></h:inputText></td>
-					</tr>
-					<tr>
-						<td><h:outputLabel>Población</h:outputLabel></td>
-						<td align="center"><h:inputText
-								value="#{stadiumBean.stadium.population}"></h:inputText></td>
-					</tr>
-					<tr>
-						<td><h:outputLabel>Temperatura</h:outputLabel></td>
-						<td align="center"><h:inputText
-								value="#{stadiumBean.stadium.temperature}"></h:inputText></td>
-					</tr>
-					<tr>
+				<p:growl id="stadiumNuevo" sticky="true" showDetail="true"
+					life="3000" />
+			</h:form>
+		
+		
+			<h:form>
+				<p:dialog header="Nuevo Estadio" widgetVar="dlgS" resizable="false">
+					<h:panelGrid columns="2" cellpadding="5">
 
-						<td colspan="2" align="center"><h:commandButton
-								value="Guardar cambios"
-								action="#{stadiumBean.modificarEstadio}"></h:commandButton></td>
+						<h:outputLabel for="Ciudad" value="Ciudad" />
+						<p:inputText id="Ciudad1"
+							value="#{stadiumBean.stadium.city}" />
 
-					</tr>
-				</h:form>
+						<h:outputLabel for="Capacidad" value="Capacidad" />
+						<p:inputText id="Capacidad1"
+							value="#{stadiumBean.stadium.capacity}" />
 
-			</p:panelGrid>
-			<br></br>
-			<br></br>
-			<br></br>
-			<br></br>
+						<h:outputLabel for="Foto" value="Foto" />
+						<p:inputText id="Foto1" value="#{stadiumBean.stadium.photo}" />
+						
+						<h:outputLabel for="Temperatura" value="Temperatura" />
+						<p:inputText id="Temperatura1" value="#{stadiumBean.stadium.temperature}"/>
+						
+						<h:outputLabel for="Poblacion" value="Poblacion" />
+						<p:inputText id="Poblacion1" value="#{stadiumBean.stadium.population}"/>
+						
+						<f:facet name="footer">
+							<p:commandButton value="Nuevo Estadio"
+								action="#{stadiumBean.adicionarEstadio}"
+								onclick="handleLoginRequest(xhr, status, args)" />
+						</f:facet>
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
+			
+			
 			<h:panelGrid columns="1" cellpadding="10">
 
 				<p:dataTable id="table2" var="stadium" rowStyleClass="highlight"
@@ -308,7 +297,7 @@ body {
 					<p:column headerText="Modificar">
 						<h:form>
 							<h:commandButton value="Modificar Informacion"
-								action="#{goalscorerBean.prepararModificarGoleador}"
+								action="#{stadiumBean.prepararModificarEstadio}"
 								update="panel"></h:commandButton>
 						</h:form>
 					</p:column>
@@ -320,55 +309,43 @@ body {
 			</h:panelGrid>
 		</p:tab>
 		<p:tab title="Goleadores">
-			<p:panelGrid border="2" style="display:block; text-align:center">
+		<h:form>
 
+				<p:commandButton value="Nuevo Goleador"
+					oncomplete="PF('dlgG').show();"
+					action="#{goalscorerBean.prepararAdicionarGoleador}"
+					update="goleadorNuevo" />
 
-				<h:form>
-					<tr>
+				<p:growl id="goleadorNuevo" sticky="true" showDetail="true"
+					life="3000" />
+			</h:form>
+			<h:form>
+				<p:dialog header="goleadorNuevo" widgetVar="dlgG" resizable="false">
+					<h:panelGrid columns="2" cellpadding="5">
 
-						<td colspan="2" align="center"><h1>Goleador</h1></td>
-					</tr>
-					<tr>
-						<td><h:outputLabel>Goleador</h:outputLabel></td>
-						<td><h:inputText
-								value="#{goalscorerBean.goalscorer.fullName}" required="true"
-								requiredMessage="Campo de Nombre Completo obligatorio"
-								id="txtGoleador"></h:inputText></td>
-						<h:message for="txtGoleador" errorStyle="color:blue" />
+						<h:outputLabel for="Nombre Completo" value="Nombre Completo" />
+						<p:inputText id="NombreCompleto1"
+							value="#{goalscorerBean.goalscorer.fullName}" />
 
-					</tr>
-					<br></br>
-					<tr>
-						<td><h:outputLabel>Goles</h:outputLabel></td>
-						<td><h:inputText value="#{goalscorerBean.goalscorer.goals}"
-								required="true"
-								requiredMessage="Campo de Correo Electrónico obligatorio"
-								id="txtGoles"></h:inputText></td>
-						<h:message for="txtGoles" errorStyle="color:red"></h:message>
-					</tr>
-					<tr>
-						<td><h:outputLabel>Foto</h:outputLabel></td>
-						<td align="center"><h:inputText
-								value="#{goalscorerBean.goalscorer.photo}"></h:inputText></td>
-					</tr>
-					<tr>
-						<td><h:outputLabel>Equipo</h:outputLabel></td>
-						<td align="center"><h:inputText
-								value="#{goalscorerBean.goalscorer.team}"></h:inputText></td>
-					</tr>
-					<tr>
+						<h:outputLabel for="Equipo" value="Equipo" />
+						<p:inputText id="Equipo1"
+							value="#{goalscorerBean.goalscorer.team}" />
 
-						<td colspan="2" align="center"><h:commandButton
-								value="Guardar cambios"
-								action="#{goalscorerBean.modificarGoleador}"></h:commandButton></td>
-
-					</tr>
-				</h:form>
-			</p:panelGrid>
-			<br></br>
-			<br></br>
-			<br></br>
-			<br></br>
+						<h:outputLabel for="Foto" value="Foto" />
+						<p:inputText id="Foto1" value="#{goalscorerBean.goalscorer.photo}" />
+						
+						<h:outputLabel for="Goles" value="Goles" />
+						<p:inputText id="Goles1" value="#{goalscorerBean.goalscorer.goals}"/>
+						
+									
+						<f:facet name="footer">
+							<p:commandButton value="Nuevo Goleador"
+								action="#{goalscorerBean.adicionarGoleador}"
+								onclick="handleLoginRequest(xhr, status, args)" />
+						</f:facet>
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
 			<h:panelGrid columns="1" cellpadding="10">
 
 				<p:dataTable id="table3" var="pajaro" rowStyleClass="highlight"
@@ -439,11 +416,12 @@ body {
 				<p:column headerText="Intentos">
 					<h:outputText value="#{user.intentos}" />
 				</p:column>
-				
+
 				<p:column headerText="Habilitar o desabilitar">
 					<h:form>
-					<h:commandButton value ="Habilitar/Deshabilitar" action="#{userBean.eliminarUsuario}" update="table"></h:commandButton>
-						
+						<h:commandButton value="Habilitar/Deshabilitar"
+							action="#{userBean.eliminarUsuario}" update="table"></h:commandButton>
+
 					</h:form>
 				</p:column>
 
@@ -459,96 +437,74 @@ body {
 			</p:dataTable>
 		</p:tab>
 		<p:tab title="Equipos">
-			<p:panelGrid border="2" style="display:block; text-align:center">
+		
+		
+		
+		<h:form>
 
-				<h:form>
-					<tr>
+				<p:commandButton value="Nuevo Equipo"
+					oncomplete="PF('dlgE').show();"
+					action="#{teamBean.prepararAdicionarTeam}"
+					update="equipoNuevo" />
 
-						<td colspan="2" align="center"><h1>Equipo</h1></td>
-					</tr>
-					<tr>
-						<td><h:outputLabel>Ciudad</h:outputLabel></td>
-						<td><h:inputText value="#{teamBean.team.country}"
-								required="true"
-								requiredMessage="Campo de Nombre Completo obligatorio"
-								id="txtCiudad"></h:inputText></td>
-						<h:message for="txtCiudad" errorStyle="color:blue" />
+				<p:growl id="equipoNuevo" sticky="true" showDetail="true"
+					life="3000" />
+			</h:form>
+			<h:form>
+				<p:dialog header="equipoNuevo" widgetVar="dlgE" resizable="false">
+					<h:panelGrid columns="2" cellpadding="5">
 
-					</tr>
-					<br></br>
-					<tr>
-						<td><h:outputLabel>Bandera</h:outputLabel></td>
-						<td><h:inputText value="#{teamBean.team.flag}"
-								required="true"
-								requiredMessage="Campo de Correo Electrónico obligatorio"
-								id="txtBandera"></h:inputText></td>
-						<h:message for="txtBandera" errorStyle="color:red"></h:message>
-					</tr>
-					<tr>
-						<td><h:outputLabel>Goles en contra</h:outputLabel></td>
-						<td align="center"><h:inputText
-								value="#{teamBean.team.goalsFavor}"></h:inputText></td>
-					</tr>
-					<tr>
-						<td><h:outputLabel>Goles a favor</h:outputLabel></td>
-						<td align="center"><h:inputText
-								value="#{teamBean.team.goalsAgainst}"></h:inputText></td>
-					</tr>
-					<tr>
-						<td><h:outputLabel>Grupo</h:outputLabel></td>
-						<td align="center"><h:inputText
-								value="#{teamBean.team.group}"></h:inputText></td>
-					</tr>
+						<h:outputLabel for="Pais" value="Pais" />
+						<p:inputText id="Pais1"
+							value="#{teamBean.team.country}" />
 
-					<tr>
-						<td><h:outputLabel>Partidos perdidos</h:outputLabel></td>
-						<td align="center"><h:inputText
-								value="#{teamBean.team.lostMatches}"></h:inputText></td>
-					</tr>
+						<h:outputLabel for="Bandera" value="Bandera" />
+						<p:inputText id="Bandera1"
+							value="#{teamBean.team.flag}" />
 
-					<tr>
-						<td><h:outputLabel>Partidos jugados</h:outputLabel></td>
-						<td align="center"><h:inputText
-								value="#{teamBean.team.playedGames}"></h:inputText></td>
-					</tr>
-
-					<tr>
-						<td><h:outputLabel>Estado</h:outputLabel></td>
-						<td align="center"><h:inputText
-								value="#{teamBean.team.state}"></h:inputText></td>
-					</tr>
-
-					<tr>
-						<td><h:outputLabel>Partidos empatados</h:outputLabel></td>
-						<td align="center"><h:inputText
-								value="#{teamBean.team.tiedMatches}"></h:inputText></td>
-					</tr>
-
-					<tr>
-						<td><h:outputLabel>Partidos ganados</h:outputLabel></td>
-						<td align="center"><h:inputText
-								value="#{teamBean.team.wonMatches}"></h:inputText></td>
-					</tr>
-
-					<tr>
-						<td colspan="2" align="center"><h:commandButton
-								value="Guardar cambios" action="#{teamBean.modificarTeam}"></h:commandButton></td>
-					</tr>
-
-				</h:form>
-			</p:panelGrid>
-			<br></br>
-			<br></br>
-			<br></br>
-			<br></br>
-			<p:dataTable id="tableTeam" var="team" value="#{teamBean.listaEquipos}"
-				rows="5" paginator="true"
+						<h:outputLabel for="Grupo" value="Grupo" />
+						<p:inputText id="Grupo1" value="#{teamBean.team.group}" />
+						
+						<h:outputLabel for="Partidos Jugados" value="Partidos Jugados" />
+						<p:inputText id="PartidosJugados1" value="#{teamBean.team.playedGames}"/>
+						
+						<h:outputLabel for="Partidos Ganados" value="Partidos Ganados" />
+						<p:inputText id="PartidosGanados1" value="#{teamBean.team.wonMatches}"/>
+						
+						<h:outputLabel for="Partidos Empatados" value="Partidos Empatados" />
+						<p:inputText id="PartidosEmpatados1" value="#{teamBean.team.tiedMatches}"/>
+						
+						<h:outputLabel for="Partidos Perdidos" value="Partidos Perdidos" />
+						<p:inputText id="PartidosPerdidos1" value="#{teamBean.team.lostMatches}"/>
+						
+						<h:outputLabel for="Goles a Favor" value="Goles a Favor" />
+						<p:inputText id="GolesaFavor1" value="#{teamBean.team.goalsFavor}"/>
+						
+						<h:outputLabel for="Goles en Contra" value="Goles en Contra" />
+						<p:inputText id="GolesenContra1" value="#{teamBean.team.goalsAgainst}"/>
+						
+						<h:outputLabel for="Estado" value="Estado" />
+						<p:inputText id="Estado1" value="#{teamBean.team.state}"/>
+						
+									
+						<f:facet name="footer">
+							<p:commandButton value="Nuevo Equipo"
+								action="#{teamBean.adicionarTeam}"
+								onclick="handleLoginRequest(xhr, status, args)" />
+						</f:facet>
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
+		
+		
+			<p:dataTable id="tableTeam" var="team"
+				value="#{teamBean.listaEquipos}" rows="5" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="5, 10">
 				<p:column headerText="Id">
 					<h:outputText value="#{team.id}" />
 				</p:column>
-                                <p:column headerText="Pais">
+				<p:column headerText="Pais">
 					<h:outputText value="#{team.country}" />
 				</p:column>
 
@@ -576,14 +532,14 @@ body {
 				</p:column>
 				<p:column headerText="Goles a Favor">
 					<h:outputText value="#{team.goalsFavor}" />
-				</p:column>				
-                                <p:column headerText="Goles en Contra">
+				</p:column>
+				<p:column headerText="Goles en Contra">
 					<h:outputText value="#{team.goalsAgainst}" />
 				</p:column>
-                                <p:column headerText="Estado">
+				<p:column headerText="Estado">
 					<h:outputText value="#{team.state}" />
 				</p:column>
-                                <p:column headerText="Eliminar">
+				<p:column headerText="Eliminar">
 					<h:commandButton value="Eliminar Equipo"></h:commandButton>
 				</p:column>
 
@@ -597,7 +553,11 @@ body {
 					<p:commandButton type="button" icon="fa fa-cloud-upload" />
 				</f:facet>
 			</p:dataTable>
+			
 		</p:tab>
+		
+		
+		
 		<p:tab title="Gestion de cuenta">
 			<h:panelGrid columns="1" cellpadding="10">
 				<p:panel id="panel" header="Configurar informacion personal"
@@ -713,8 +673,98 @@ body {
 				</f:facet>
 			</p:dataTable>
 			<h:form>
-			<h:commandButton value="Exportar Excel"></h:commandButton>
-			<h:commandButton value="Exportar Pdf"></h:commandButton>
+				<h:commandButton value="Exportar Excel"></h:commandButton>
+				<h:commandButton value="Exportar Pdf"></h:commandButton>
+			</h:form>
+	</p:tab>
+	
+		<p:tab title="Parametros">
+			<p:dataTable id="tableParameter" var="parameter"
+				value="#{parameterBean.listaParameter}" rows="5" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5, 10">
+				<p:column headerText="Id">
+					<h:outputText value="#{parameter.id}" />
+				</p:column>
+
+				<p:column headerText="Tipo del Parameter">
+					<h:outputText value="#{parameter.parameterType}" />
+				</p:column>
+
+				<p:column headerText="Codigo del Parametro">
+					<h:outputText value="#{parameter.parameterCode}" />
+				</p:column>
+
+				<p:column headerText="Descripcion del parametro">
+					<h:outputText value="#{parameter.descriptionParameter}" />
+				</p:column>
+				<p:column headerText="Valor del Texto">
+				<h:outputText value="#{parameter.textValue}" />
+				</p:column>
+				<p:column headerText="Numero del valor">
+					<h:outputText value="#{parameter.numberValue}" />
+				</p:column>
+				<p:column headerText="Modificar">
+								    
+		     
+    <p:commandButton value="Modificar" oncomplete="PF('dlgEdit').show();" action="#{parameterBean.prepararModificarParameter}" update="dialogMod"/>
+    	
+   
+    
+    
+   
+   
+   
+ 
+ 
+   <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+ 
+   <p:dialog id="dialogMod" header="Modificar Parameter" widgetVar="dlgEdit" resizable="false">
+        <h:panelGrid columns="2" cellpadding="5">
+            
+ <h:outputLabel for="id" value="id" />
+            <p:inputText id="id" value="#{parameterBean.parameter.id}"    />
+           
+            <h:outputLabel for="TipodeParametros" value="Tipo de Parametros" />
+            <p:inputText id="TipodeParametros" value="#{parameterBean.parameter.parameterType}"    />
+           
+  <h:outputLabel for="parameterCode" value="Codigo del parametro" />
+            <p:inputText id="parameterCode" value="#{parameterBean.parameter.parameterCode}"    />
+           
+            <h:outputLabel for="descriptionParameter" value="Descripcion del Parametro" />
+           <p:inputText id="largeDescription1" value="#{parameterBean.parameter.descriptionParameter}"    />
+            
+ <h:outputLabel for="textValue" value="Valor del Texto" />
+            <p:inputText id="textValue" value="#{parameterBean.parameter.textValue}"    />
+           
+            <h:outputLabel for="numberValue" value="Numero del Valor" />
+           <p:inputText id="numberValue" value="#{parameterBean.parameter.numberValue}"    />
+ 
+           <f:facet name="footer">
+                <p:commandButton value="Modificar" action="#{parameterBean.modificarParameter}"
+                                 onclick="handleLoginRequest(xhr, status, args)" />
+           </f:facet>  
+        </h:panelGrid>
+   </p:dialog>
+    
+				</p:column>
+			
+
+		
+
+
+
+			<f:facet name="paginatorTopLeft">
+					<p:commandButton type="button" icon="fa fa-sync" />
+			</f:facet>
+
+			<f:facet name="paginatorBottomRight">
+				<p:commandButton type="button" icon="fa fa-cloud-upload" />
+			</f:facet>
+			</p:dataTable>
+			<h:form>
+			
 			</h:form>
 		</p:tab>
 			
@@ -808,6 +858,7 @@ body {
 			</h:form>
 		</p:tab>
 		
+
 
 	</p:tabView>
 

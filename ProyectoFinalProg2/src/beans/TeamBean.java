@@ -16,13 +16,15 @@ import impl.TeamDaoImpl;
 @SessionScoped
 public class TeamBean {
 
+	
+	
 	private Team team;
 	private DataModel<Team> listaEquipos;
 
 	public String prepararAdicionarTeam() {
 		team = new Team();
 		team.setState("A");
-		return "RegistrarEquipo";
+		return "panelAdmin.xhtml";
 	}
 
 	public String prepararModificarTeam() {

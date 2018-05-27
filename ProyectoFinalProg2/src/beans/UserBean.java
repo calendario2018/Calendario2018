@@ -7,8 +7,10 @@ import java.util.List;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 import org.apache.log4j.Logger;
+import org.primefaces.context.RequestContext;
 
 import dao.ParameterDao;
 import dao.UserDao;
@@ -43,9 +45,10 @@ public class UserBean {
 	private String lastPassword;
 	private String confLastPassword;
 	private InfoUser usuarioLogin;
-
-	private boolean on;
-	private boolean off;
+	private String correo;
+	private List<User> listaValidarCorreo;
+	private String nickname;
+	
 public String cambiarPassword(){
 	UserDao dao= new UserDaoImpl();
 	if(listaValidar.get(0).getPassword().equals(getStringMessageDigest(password, MD5))){
@@ -73,87 +76,7 @@ public String cambiarPassword(){
 	
 	
 }
-	public String getLastPassword() {
-		return lastPassword;
-	}
-
-	public void setLastPassword(String lastPassword) {
-		this.lastPassword = lastPassword;
-	}
-
-	public String getConfLastPassword() {
-		return confLastPassword;
-	}
-
-	public void setConfLastPassword(String confLastPassword) {
-		this.confLastPassword = confLastPassword;
-	}
-
-	public boolean isOn() {
-		return on;
-	}
-
-	public void setOn(boolean on) {
-		this.on = on;
-	}
-
-	public boolean isOff() {
-		return off;
-	}
-
-	public void setOff(boolean off) {
-		this.off = off;
-	}
-
-	public void addMessage() {
-		String summary = on? "Registro Activo" : "Registro Inactivo";
-		System.out.println(summary);
-		if (summary.equals("Registro Activo")) {
-			this.activarRegistro();
-			System.out.println("Se activó");
-		} else {
-			this.desactivarRegistro();
-			System.out.println("Se desactivó");
-		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(summary));
-	}
-
-	public String getContrasenia() {
-		return contrasenia;
-	}
-
-	public void setContrasenia(String contrasenia) {
-		this.contrasenia = contrasenia;
-	}
-
-	public String getBuscar() {
-		return buscar;
-	}
-
-	public void setBuscar(String buscar) {
-		this.buscar = buscar;
-	}
-
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-
-	public DataModel<User> getFiltrados() {
-
-		return filtrados;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	
 
 	public String prepararAdicionarUsuario() {
 		List<Parameter> lista = new ParameterDaoImpl().list();
@@ -225,24 +148,33 @@ public String cambiarPassword(){
 		AuditBean auditoria = new AuditBean();
 		auditoria.adicionarAuditoria("Registrar", 0, "user", (int) (long) user.getId());
 		log.info("Se creó el usuario: " + user.getUserName());
-
+		user.setActive("A");
 		email = new Email();
 		try {
-
-			email.SendEmail("rusia.calendar2018", "wilsonrojas", user.getEmailAddress(),
-					"Bienvenido a Calendario Mundial Rusia",
-					"Hola, " + user.getFullName()
-							+ ": Te damos la bienvenida a Calendario Mundial Rusia, una página web en"
-							+ " donde podrás encontrar el cronograma, información y noticias actualizadas de este gran evento deportivo."
-							+ "\n" + "Usuario: " + user.getUserName() + "\n" + "Contraseña: " + contrasenia + "\n"
-							+ "\n"
-							+ "La primera vez que ingrese como usuario deberá cambiar la contraseña, tiene un plazo de 5 días.");
+			enviarMensajeCorreo(user.getFullName(),user.getUserName(), contrasenia);
+		} catch (AddressException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "Login.xhtml";
 	}
-
+	
+	public void enviarMensajeCorreo(String fullname, String username, String password) throws AddressException, MessagingException {
+		email.SendEmail("rusia.calendar2018", "wilsonrojas", user.getEmailAddress(),
+				"Bienvenido a Calendario Mundial Rusia",
+				"Hola, " + fullname
+						+ ": Le damos la bienvenida a Calendario Mundial Rusia, una página web en"
+						+ " donde podrá encontrar el cronograma, información y noticias actualizadas de este gran evento deportivo."
+						+ "\n" + "Usuario: " + username + "\n" + "Contraseña: " + password + "\n"
+						+ "\n"
+						+ "La primera vez que ingrese como usuario deberá cambiar la contraseña, tiene un plazo de 5 días.");
+		
+	}
+	
+	
 	public String modificarUsuario() {
 
 		UserDaoImpl dao = new UserDaoImpl();
@@ -254,22 +186,56 @@ public String cambiarPassword(){
 		return "PanelUsuarios.xhtml";
 	}
 
-	public User getUser() {
-		return user;
-	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+	
+	public String recuperarContrasenia() {
+	
+		UserDao dao = new UserDaoImpl();
+		listaValidarCorreo = dao.getUserUsuario(nickname);
+		FacesMessage message = null;
+		if(!listaValidarCorreo.isEmpty()) {
+			if(listaValidarCorreo.get(0).getEmailAddress().equals(correo)) {
+				email = new Email();
+				String con = generarContraseñaAleatoria();
+				User UsuarioTemp = listaValidarCorreo.get(0);
+				UsuarioTemp.setPassword(getStringMessageDigest(con, MD5));
+				dao.update(UsuarioTemp);
+				try {
+					email.SendEmail("rusia.calendar2018", "wilsonrojas", correo,
+							"Calendario Mundial Rusia",
+							"Hola, " + UsuarioTemp.getFullName()
+									+ ": La siguiente información es de su interés, esta será su nueva contraseña hasta que decida modificarla "
+									+ "\n" + "Usuario: " + UsuarioTemp.getUserName() + "\n" + "Contraseña: " + con);
+					message=new FacesMessage(FacesMessage.SEVERITY_INFO,
+			                  "Mensaje enviado", "Se envio a su correo la clave de recuperación");
+					 RequestContext.getCurrentInstance().showMessageInDialog(message);
+			
+			      
+				} catch (AddressException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (MessagingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			else {
+			
+				message=new FacesMessage(FacesMessage.SEVERITY_INFO,
+		                  "Incorrecto", "No es el correo con el que se registró");
+				 RequestContext.getCurrentInstance().showMessageInDialog(message);
+				 
+			}
+		}else {
 
-	public DataModel<User> getListaUsuarios() {
-		List<User> lista = new UserDaoImpl().list();
-		listaUsuarios = new ListDataModel<User>(lista);
-		return listaUsuarios;
-	}
-
-	public void setListaUsuarios(DataModel<User> listaUsuarios) {
-		this.listaUsuarios = listaUsuarios;
+			message=new FacesMessage(FacesMessage.SEVERITY_INFO,
+	                  "Incorrecto", "No existe ese usuario");
+			 RequestContext.getCurrentInstance().showMessageInDialog(message);
+	
+		}
+		return "RecuperarContraseña";
+		
 	}
 
 	public String ingresarUsuario() {
@@ -293,7 +259,7 @@ public String cambiarPassword(){
 
 				} else if (listaValidar.get(0).getUserType().equals("usuario")) {
 					if (listaValidar.get(0).getActive().equals("A"))
-						if (listaValidar.get(0).getIntentos() < 3) {
+						if (listaValidar.get(0).getIntentos() <= 3) {
 							FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Bienvenido " + usuario));
 							AuditBean auditoria = new AuditBean();
 							auditoria.adicionarAuditoria("LoginUser", 0, "User",
@@ -495,5 +461,97 @@ public String cambiarPassword(){
 	}
 	public InfoUser getUsuarioLogin() {
 		return usuarioLogin;
+	}
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public DataModel<User> getListaUsuarios() {
+		List<User> lista = new UserDaoImpl().list();
+		listaUsuarios = new ListDataModel<User>(lista);
+		return listaUsuarios;
+	}
+
+	public void setListaUsuarios(DataModel<User> listaUsuarios) {
+		this.listaUsuarios = listaUsuarios;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+	public String getLastPassword() {
+		return lastPassword;
+	}
+
+	public void setLastPassword(String lastPassword) {
+		this.lastPassword = lastPassword;
+	}
+
+	public String getConfLastPassword() {
+		return confLastPassword;
+	}
+
+	public void setConfLastPassword(String confLastPassword) {
+		this.confLastPassword = confLastPassword;
+	}
+
+
+
+	public List<User> getListaValidarCorreo() {
+		return listaValidarCorreo;
+	}
+	public void setListaValidarCorreo(List<User> listaValidarCorreo) {
+		this.listaValidarCorreo = listaValidarCorreo;
+	}
+	
+
+	public String getContrasenia() {
+		return contrasenia;
+	}
+
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
+	}
+
+	public String getBuscar() {
+		return buscar;
+	}
+
+	public void setBuscar(String buscar) {
+		this.buscar = buscar;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public DataModel<User> getFiltrados() {
+
+		return filtrados;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

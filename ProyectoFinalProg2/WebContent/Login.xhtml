@@ -40,14 +40,35 @@
         <f:facet name="left">
          <h:panelGrid columns="3">
             <p:commandButton value="Ingresar" update="panel" action="#{userBean.ingresarUsuario}" style="margin-right:20px;"  />
-            <p:commandButton value="Recuperar Clave"  action="#{userBean.ingresarUsuario}" style="margin-right:20px;"  />
+            <p:commandButton value="Olvidé mi contraseña" immediate="true" action="RecuperarContraseña.xhtml"  style="margin-right:20px;"  />
             <p:commandButton value="Volver"  action="PaginaPrincipal.xhtml" style="margin-right:20px;" immediate="true" />
+            
   </h:panelGrid>
         </f:facet>
         
     </p:toolbar>
+    
+   
   </h:form>
+<h:form id="olv">
+ <p:dialog id="dialogOlvide" header="Recuperar Contraseña" widgetVar="dialogOlvide" resizable="false">
+        <h:panelGrid columns="2" cellpadding="5">
+            
+ <p:outputLabel for= "nickname" value="Nombre de Usuario" style=" size: 10px" />
+            <p:inputText id= "nickname" value="#{userBean.nickname}" required="true" label="nombre" style=" size: 40px; margin-right:80px">
+                
+            </p:inputText>
+ 
+            
+       
+                <p:commandButton value="Enviar" immediate="true" 
+                               action="#{userBean.recuperarContrasenia}"  />
+          
+        </h:panelGrid>
+    </p:dialog>
 
+
+</h:form>
 
 
 

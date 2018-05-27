@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.faces.validator.ValidatorException;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
@@ -24,6 +25,7 @@ import util.InfoUser;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
@@ -556,4 +558,97 @@ public String cambiarPassword(){
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+ 	//------------------------------VALIDACIONES FORMULARIO REGISTRO-------------------------------------------------------
+ 
+ 	
+ 	public boolean contieneNumeros(String texto) 
+ 	{
+ 		boolean rta = false;
+ 
+ 		String nums= "0123456789";
+ 
+ 		for (int i = 0; i < texto.length(); i++)
+ 		{
+ 			for (int j = 0; j < nums.length(); j++)
+ 		{
+ 				if(texto.charAt(i)==nums.charAt(j)) 
+ 				{
+ 					rta=true;
+ 				}
+ 			}
+ 		}
+ 
+ 		return rta;
+	}
+ 	
+ 	public boolean contieneCaracteres(String texto) 
+ 	{
+ 		boolean rta=false;
+ 		
+ 		String letras="@abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789";
+ 		
+ 		int contador =0;
+ 	for (int i = 0; i < texto.length(); i++)
+ 		{
+ 			for (int j = 0; j < letras.length(); j++)
+ 			{
+ 				if(texto.charAt(i)==letras.charAt(j)) 
+ 				{
+ 					contador++;
+ 				}
+ 			}
+ 		}
+ 		
+ 		if(contador!=texto.length()) 
+ 		{
+ 			rta=true;
+ 		}
+ 		
+ 		return rta;
+ 	}
+ 
+ 	public void validar(FacesContext arg0, UIComponent arg1, Object arg2) throws ValidatorException 
+ 	{
+ 		validarCaracteres(arg0, arg1, arg2);
+ 		if (contieneNumeros((String)arg2))
+ 		{
+ 			throw new ValidatorException(new FacesMessage("El campo nombre no debe contener números"));
+ 		}
+ 	}
+ 
+ 
+ 	public void validarCorreo(FacesContext arg0, UIComponent arg1, Object arg2) throws ValidatorException 
+ 	{
+ 		if (!((String)arg2).contains("@"))
+ 		{
+ 			throw new ValidatorException(new FacesMessage("El correo debe contener @"));
+ 		}
+ 	}
+ 
+ 	
+ 	
+ 	
+	
+ 	public void validarUsuarioRepetido(FacesContext arg0, UIComponent arg1, Object arg2) throws ValidatorException 
+ 	{
+ 		buscar=(String)arg2;
+ 		UserDao dao = new UserDaoImpl();
+ 		listaFiltrados = dao.getUserUsuario(buscar);
+ 		validarCaracteres(arg0, arg1, arg2);
+ 		if (!listaFiltrados.isEmpty()) {
+ 			throw new ValidatorException(new FacesMessage("El usuario ya existe"));
+ 		}
+ 	}
+ 
+ 	public void validarCaracteres(FacesContext arg0, UIComponent arg1, Object arg2) throws ValidatorException
+ 	{
+ 		if (contieneCaracteres((String)arg2)) 
+ 		{
+ 		throw new ValidatorException(new FacesMessage("Ingrese caracteres válidos"));
+		}
+ 	}
+ 
+ 	//----------------------------------------------------------------------------------------------------------
+ 	
 }

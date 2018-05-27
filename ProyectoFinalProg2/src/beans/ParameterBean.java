@@ -3,12 +3,14 @@ package beans;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import dao.ParameterDao;
 import entity.Parameter;
 import impl.ParameterDaoImpl;
 @ManagedBean
+@SessionScoped
 public class ParameterBean {
 	private Parameter parameter;
 	private DataModel<Parameter> listaParameter;
@@ -16,7 +18,7 @@ public class ParameterBean {
 	public String prepararAdicionarParameter()
 	{
 		parameter = new Parameter();
-		return "PanelUsuario.xhtml";
+		return "panelAdmin.xhtml";
 	}
 
 	public String adicionarParameter() 
@@ -24,7 +26,7 @@ public class ParameterBean {
 		ParameterDao dao = new ParameterDaoImpl();
 		dao.save(parameter);
 
-		return "PanelUsuario.xhtml";
+		return "panelAdmin.xhtml";
 	}
 
 	public Parameter getParameter()
@@ -48,14 +50,14 @@ public class ParameterBean {
 	}
 	public String prepararModificarParameter() {
 		parameter= (Parameter) listaParameter.getRowData();
-		return"";
+		return "panelAdmin.xhtml";
 	}
 	public String modificarParameter() {
 		ParameterDaoImpl dao= new ParameterDaoImpl();
 		dao.update(parameter);
 		AuditBean auditoria = new AuditBean();
-		auditoria.adicionarAuditoria("UpdateParameter", (int)(long)parameter.getId(), "parameter", (int) (long) parameter.getId());
-		return "";
+		auditoria.adicionarAuditoria("UpdatParam", (int)(long)parameter.getId(), "parameter", (int) (long) parameter.getId());
+		return "panelAdmin.xhtml";
 	}
 
 }

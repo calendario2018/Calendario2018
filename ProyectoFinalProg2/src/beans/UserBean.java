@@ -261,6 +261,7 @@ public String cambiarPassword(){
 				} else if (listaValidar.get(0).getUserType().equals("usuario")) {
 					if (listaValidar.get(0).getActive().equals("A"))
 						if (listaValidar.get(0).getIntentos() <= 3) {
+							
 							FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Bienvenido " + usuario));
 							AuditBean auditoria = new AuditBean();
 							auditoria.adicionarAuditoria("LoginUser", 0, "User",

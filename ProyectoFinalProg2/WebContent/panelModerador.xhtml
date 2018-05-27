@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+<h:head>
+
+	<h:outputStylesheet library="css" name="PaginaPrincipal.css"></h:outputStylesheet>
+	<style>
+* {
+	box-sizing: border-box;
+}
+ 
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.highlight {
+	background: none;
+}
+
+.table2 {
+	background-color: blue;
+	color: rgb(210, 195, 115);
+}
+
+/* Style the header */
+.header {
+	padding: 30px;
+	text-align: center;
+	font-size: 35px;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+	float: left;
+	padding: 10px;
+	height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+
+/* Style the footer */
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media ( max-width : 600px) {
+	.column.side, .column.middle {
+		width: 100%;
+	}
+}
+</style>
+
+</h:head>
+
+
+<h:body>
+
+	<div class="header"
+		style="height: 240px; background-color: rgba(253, 132, 132, 0.5); padding: 0px">
+		<p:graphicImage name="./images/Portada2.png"
+			style="width:100%; margin-left:0px;" />
+
+
+
+	</div>
+	<h:form>
+		<p:growl id="messages" />
+		<p:menubar id="menubar" styleClass="ui-state-hover">
+			<p:menuitem value="Inicio" icon="ui-icon-home"></p:menuitem>
+			<f:facet name="options">
+
+
+				<h:commandButton value="Cerrar Sesión"
+					action="PaginaPrincipal.xhtml"></h:commandButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+
+
+
+	<p:tabView orientation="top"
+		style="background-color:rgba(229,217,137,0.2)">
+
+		<p:tab title="Noticias">
+
+
+			<h:form>
+
+				<p:commandButton value="Nueva Noticia"
+					oncomplete="PF('dlg').show();"
+					action="#{newBean.prepararAdicionarNoticia}" update="growl" />
+
+				<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+			</h:form>
+			<h:form>
+				<p:dialog header="Nueva Noticia" widgetVar="dlg" resizable="false">
+					<h:panelGrid columns="2" cellpadding="5">
+
+						<h:outputLabel for="ShortDescription" value="Descripcion Corta" />
+						<p:inputText id="shortDescription1"
+							value="#{newBean.news.shortDescription}" />
+
+						<h:outputLabel for="largeDescription" value="Descripcion Larga" />
+						<p:inputText id="largeDescription1"
+							value="#{newBean.news.largeDescription}" />
+
+						<f:facet name="footer">
+							<p:commandButton value="Nuevo"
+								action="#{newBean.adicionarNoticia}"
+								onclick="handleLoginRequest(xhr, status, args)" />
+						</f:facet>
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
+
+			<h:form>
+				<p:dataScroller value="#{newBean.listaNoticias}" var="noticia"
+					chunkSize="10">
+					<f:facet name="header">
+          Noticias mas recientes
+        </f:facet>
+
+					<h:panelGrid columns="2" style="width:100%"
+						columnClasses="logo,detail">
+
+
+						<p:outputPanel>
+							<h:panelGrid columns="2" cellpadding="5">
+								<h:outputText value="dateNews" />
+								<h:outputText value="#{noticia.dateNews}"
+									style="font-weight: bold" />
+
+								<h:outputText value="shortDescription" />
+								<h:outputText value="#{noticia.shortDescription}"
+									style="font-weight: bold" />
+
+								<h:outputText value="largeDescription" />
+								<h:outputText value="#{noticia.largeDescription}"
+									style="font-weight: bold" />
+								<br></br>
+							</h:panelGrid>
+						</p:outputPanel>
+					</h:panelGrid>
+				</p:dataScroller>
+			</h:form>
+		</p:tab>
+
+		<p:tab title="Arbitros">
+
+
+			<h:form>
+
+				<p:commandButton value="Nuevo Arbitro"
+					oncomplete="PF('dlgA').show();"
+					action="#{refereeBean.prepararAdicionarReferee}"
+					update="refereeNuevo" />
+
+				<p:growl id="refereeNuevo" sticky="true" showDetail="true"
+					life="3000" />
+			</h:form>
+			<h:form>
+				<p:dialog header="Nuevo Arbitro" widgetVar="dlgA" resizable="false">
+					<h:panelGrid columns="2" cellpadding="5">
+
+						<h:outputLabel for="Nombre Completo" value="Nombre Completo" />
+						<p:inputText id="NombreCompleto1"
+							value="#{refereeBean.referee.fullName}" />
+
+						<h:outputLabel for="Nacionalidad" value="Nacionalidad" />
+						<p:inputText id="Nacionalidad1"
+							value="#{refereeBean.referee.nationality}" />
+
+						<h:outputLabel for="Estado" value="Estado" />
+						<p:inputText id="Estado1" value="#{refereeBean.referee.state}" />
+
+						<f:facet name="footer">
+							<p:commandButton value="Nuevo Referee"
+								action="#{refereeBean.adicionarReferee}"
+								onclick="handleLoginRequest(xhr, status, args)" />
+						</f:facet>
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
+
+
+
+
+
+			<h:panelGrid columns="1" cellpadding="10">
+
+				<p:dataTable id="table1" var="referee"
+					value="#{refereeBean.listaReferes}" rows="5" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5, 10">
+
+					<p:column headerText="Nombre Completo">
+						<h:outputText value="#{referee.fullName}" />
+					</p:column>
+
+					<p:column headerText="Nacionalidad">
+						<h:outputText value="#{referee.nationality}" />
+					</p:column>
+					<p:column headerText="Estado">
+						<h:outputText value="#{referee.state}" />
+					</p:column>
+					<p:column headerText="Modificar">
+						<h:form>
+							<h:commandButton value="Modificar Informacion"
+								action="#{goalscorerBean.prepararModificarGoleador}"
+								update="panel"></h:commandButton>
+						</h:form>
+					</p:column>
+
+				</p:dataTable>
+			</h:panelGrid>
+		</p:tab>
+		
+		
+		
+		
+		<p:tab title="Estadios">
+		
+		
+			<h:form>
+
+				<p:commandButton value="Nuevo Estadio"
+					oncomplete="PF('dlgS').show();"
+					action="#{stadiumBean.prepararAdicionarEstadio}"
+					update="stadiumNuevo" />
+
+				<p:growl id="stadiumNuevo" sticky="true" showDetail="true"
+					life="3000" />
+			</h:form>
+		
+		
+			<h:form>
+				<p:dialog header="Nuevo Estadio" widgetVar="dlgS" resizable="false">
+					<h:panelGrid columns="2" cellpadding="5">
+
+						<h:outputLabel for="Ciudad" value="Ciudad" />
+						<p:inputText id="Ciudad1"
+							value="#{stadiumBean.stadium.city}" />
+
+						<h:outputLabel for="Capacidad" value="Capacidad" />
+						<p:inputText id="Capacidad1"
+							value="#{stadiumBean.stadium.capacity}" />
+
+						<h:outputLabel for="Foto" value="Foto" />
+						<p:inputText id="Foto1" value="#{stadiumBean.stadium.photo}" />
+						
+						<h:outputLabel for="Temperatura" value="Temperatura" />
+						<p:inputText id="Temperatura1" value="#{stadiumBean.stadium.temperature}"/>
+						
+						<h:outputLabel for="Poblacion" value="Poblacion" />
+						<p:inputText id="Poblacion1" value="#{stadiumBean.stadium.population}"/>
+						
+						<f:facet name="footer">
+							<p:commandButton value="Nuevo Estadio"
+								action="#{stadiumBean.adicionarEstadio}"
+								onclick="handleLoginRequest(xhr, status, args)" />
+						</f:facet>
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
+			
+			
+			<h:panelGrid columns="1" cellpadding="10">
+
+				<p:dataTable id="table2" var="stadium" rowStyleClass="highlight"
+					value="#{stadiumBean.filtrados}" rows="4" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5, 10">
+
+
+					<p:column headerText="Capacidad">
+						<h:outputText value="#{stadium.capacity}" />
+					</p:column>
+
+					<p:column headerText="Ciudad">
+						<h:outputText value="#{stadium.city}" />
+					</p:column>
+
+
+					<p:column headerText="Población">
+						<h:outputText value="#{stadium.population}" />
+					</p:column>
+
+					<p:column headerText="Temperatura">
+						<h:outputText value="#{stadium.temperature}" />
+					</p:column>
+					<p:column headerText="Modificar">
+						<h:form>
+							<h:commandButton value="Modificar Informacion"
+								action="#{stadiumBean.prepararModificarEstadio}"
+								update="panel"></h:commandButton>
+						</h:form>
+					</p:column>
+
+				</p:dataTable>
+
+
+
+			</h:panelGrid>
+		</p:tab>
+		<p:tab title="Goleadores">
+		<h:form>
+
+				<p:commandButton value="Nuevo Goleador"
+					oncomplete="PF('dlgG').show();"
+					action="#{goalscorerBean.prepararAdicionarGoleador}"
+					update="goleadorNuevo" />
+
+				<p:growl id="goleadorNuevo" sticky="true" showDetail="true"
+					life="3000" />
+			</h:form>
+			<h:form>
+				<p:dialog header="goleadorNuevo" widgetVar="dlgG" resizable="false">
+					<h:panelGrid columns="2" cellpadding="5">
+
+						<h:outputLabel for="Nombre Completo" value="Nombre Completo" />
+						<p:inputText id="NombreCompleto1"
+							value="#{goalscorerBean.goalscorer.fullName}" />
+
+						<h:outputLabel for="Equipo" value="Equipo" />
+						<p:inputText id="Equipo1"
+							value="#{goalscorerBean.goalscorer.team}" />
+
+						<h:outputLabel for="Foto" value="Foto" />
+						<p:inputText id="Foto1" value="#{goalscorerBean.goalscorer.photo}" />
+						
+						<h:outputLabel for="Goles" value="Goles" />
+						<p:inputText id="Goles1" value="#{goalscorerBean.goalscorer.goals}"/>
+						
+									
+						<f:facet name="footer">
+							<p:commandButton value="Nuevo Goleador"
+								action="#{goalscorerBean.adicionarGoleador}"
+								onclick="handleLoginRequest(xhr, status, args)" />
+						</f:facet>
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
+			<h:panelGrid columns="1" cellpadding="10">
+
+				<p:dataTable id="table3" var="pajaro" rowStyleClass="highlight"
+					value="#{goalscorerBean.listaGoleadores}" rows="4" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5, 10">
+
+
+					<p:column headerText="Nombre">
+						<h:outputText value="#{pajaro.fullName}" />
+					</p:column>
+
+					<p:column headerText="Equipo">
+						<h:outputText value="#{pajaro.team}" />
+					</p:column>
+
+
+					<p:column headerText="Goles">
+						<h:outputText value="#{pajaro.goals}" />
+					</p:column>
+					<p:column headerText="Modificar">
+						<h:form>
+							<h:commandButton value="Modificar Informacion"
+								action="#{goalscorerBean.prepararModificarGoleador}"
+								update="panel"></h:commandButton>
+						</h:form>
+					</p:column>
+
+
+				</p:dataTable>
+
+			</h:panelGrid>
+		</p:tab>
+		
+		<p:tab title="Equipos">
+		
+		
+		
+		<h:form>
+
+				<p:commandButton value="Nuevo Equipo"
+					oncomplete="PF('dlgE').show();"
+					action="#{teamBean.prepararAdicionarTeam}"
+					update="equipoNuevo" />
+
+				<p:growl id="equipoNuevo" sticky="true" showDetail="true"
+					life="3000" />
+			</h:form>
+			<h:form>
+				<p:dialog header="equipoNuevo" widgetVar="dlgE" resizable="false">
+					<h:panelGrid columns="2" cellpadding="5">
+
+						<h:outputLabel for="Pais" value="Pais" />
+						<p:inputText id="Pais1"
+							value="#{teamBean.team.country}" />
+
+						<h:outputLabel for="Bandera" value="Bandera" />
+						<p:inputText id="Bandera1"
+							value="#{teamBean.team.flag}" />
+
+						<h:outputLabel for="Grupo" value="Grupo" />
+						<p:inputText id="Grupo1" value="#{teamBean.team.group}" />
+						
+						<h:outputLabel for="Partidos Jugados" value="Partidos Jugados" />
+						<p:inputText id="PartidosJugados1" value="#{teamBean.team.playedGames}"/>
+						
+						<h:outputLabel for="Partidos Ganados" value="Partidos Ganados" />
+						<p:inputText id="PartidosGanados1" value="#{teamBean.team.wonMatches}"/>
+						
+						<h:outputLabel for="Partidos Empatados" value="Partidos Empatados" />
+						<p:inputText id="PartidosEmpatados1" value="#{teamBean.team.tiedMatches}"/>
+						
+						<h:outputLabel for="Partidos Perdidos" value="Partidos Perdidos" />
+						<p:inputText id="PartidosPerdidos1" value="#{teamBean.team.lostMatches}"/>
+						
+						<h:outputLabel for="Goles a Favor" value="Goles a Favor" />
+						<p:inputText id="GolesaFavor1" value="#{teamBean.team.goalsFavor}"/>
+						
+						<h:outputLabel for="Goles en Contra" value="Goles en Contra" />
+						<p:inputText id="GolesenContra1" value="#{teamBean.team.goalsAgainst}"/>
+						
+						<h:outputLabel for="Estado" value="Estado" />
+						<p:inputText id="Estado1" value="#{teamBean.team.state}"/>
+						
+									
+						<f:facet name="footer">
+							<p:commandButton value="Nuevo Equipo"
+								action="#{teamBean.adicionarTeam}"
+								onclick="handleLoginRequest(xhr, status, args)" />
+						</f:facet>
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
+		
+		
+			<p:dataTable id="tableTeam" var="team"
+				value="#{teamBean.listaEquipos}" rows="5" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5, 10">
+				<p:column headerText="Id">
+					<h:outputText value="#{team.id}" />
+				</p:column>
+				<p:column headerText="Pais">
+					<h:outputText value="#{team.country}" />
+				</p:column>
+
+				<p:column headerText="Bandera">
+					<h:outputText value="#{team.flag}" />
+				</p:column>
+
+
+				<p:column headerText="Grupo">
+					<h:outputText value="#{team.group}" />
+				</p:column>
+
+				<p:column headerText="Partidos Jugados">
+					<h:outputText value="#{team.playedGames}" />
+				</p:column>
+
+				<p:column headerText="Partidos Ganados">
+					<h:outputText value="#{team.wonMatches}" />
+				</p:column>
+				<p:column headerText="Partidos Empatados">
+					<h:outputText value="#{team.tiedMatches}" />
+				</p:column>
+				<p:column headerText="Partidos Perdidos">
+					<h:outputText value="#{team.lostMatches}" />
+				</p:column>
+				<p:column headerText="Goles a Favor">
+					<h:outputText value="#{team.goalsFavor}" />
+				</p:column>
+				<p:column headerText="Goles en Contra">
+					<h:outputText value="#{team.goalsAgainst}" />
+				</p:column>
+				<p:column headerText="Estado">
+					<h:outputText value="#{team.state}" />
+				</p:column>
+				<p:column headerText="Eliminar">
+					<h:commandButton value="Eliminar Equipo"></h:commandButton>
+				</p:column>
+
+
+
+				<f:facet name="paginatorTopLeft">
+					<p:commandButton type="button" icon="fa fa-sync" />
+				</f:facet>
+
+				<f:facet name="paginatorBottomRight">
+					<p:commandButton type="button" icon="fa fa-cloud-upload" />
+				</f:facet>
+			</p:dataTable>
+			
+		</p:tab>
+		
+		
+		
+		<p:tab title="Gestion de cuenta">
+			<h:panelGrid columns="1" cellpadding="10">
+				<p:panel id="panel" header="Configurar informacion personal"
+					style="margin-left:450px">
+
+					<p:messages id="mensaje1" />
+
+					<h:panelGrid columns="">
+						<p:outputLabel value="Nombre:" />
+						<p:inputText value="#{userBean.usuarioLogin.usuario.fullName}"
+							required="true"
+							requiredMessage="Campo de Nombre Completo obligatorio"
+							id="txtNombre"></p:inputText>
+
+
+						<p:outputLabel value="Correo:" />
+						<p:inputText value="#{userBean.usuarioLogin.usuario.emailAddress}"
+							required="true"
+							requiredMessage="Campo de Correo Electrónico obligatorio"
+							id="txtCorreo">
+						</p:inputText>
+
+
+						<p:outputLabel value="Contraseña actual:" />
+						<p:inputText>
+						</p:inputText>
+
+
+						<p:outputLabel value="Contraseña Nueva:" />
+						<p:inputText>
+						</p:inputText>
+
+
+						<p:outputLabel value="Confirmacion contraseña:" />
+						<p:inputText>
+						</p:inputText>
+
+
+						<p:outputLabel value="Telefono:" />
+						<p:inputText value="#{userBean.usuarioLogin.usuario.phoneNumber}"
+							required="true"
+							requiredMessage="Campo del telefono es obligatorio">
+						</p:inputText>
+
+
+						<h:form>
+							<h:commandButton value="Modificar Informacion"
+								action="#{userBean.modificarUsuario}" update="panel"></h:commandButton>
+						</h:form>
+
+					</h:panelGrid>
+				</p:panel>
+			</h:panelGrid>
+
+
+
+		</p:tab>
+		
+
+		<p:tab title="Calendario">
+			<h:panelGrid columns="1" cellpadding="10">
+				<div class="header">
+					<iframe
+						src="https://calendar.google.com/calendar/b/2/embed?height=350&amp;wkst=1&amp;hl=es_419&amp;bgcolor=%23ffffff&amp;src=tjaj2g3mntct23kmksg5glgqr8%40group.calendar.google.com&amp;color=%23875509&amp;ctz=America%2FBogota"
+						style="border-width: 0" width="550" height="450" frameborder="0"
+						scrolling="no"></iframe>
+
+				</div>
+
+			</h:panelGrid>
+
+		</p:tab>
+		
+	
+		
+		
+
+
+	</p:tabView>
+
+
+</h:body>
+</html>

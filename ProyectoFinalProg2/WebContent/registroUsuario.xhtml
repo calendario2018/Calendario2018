@@ -22,19 +22,26 @@
 				<p:outputLabel value="Nombre Completo:" />
 				<p:inputText value="#{userBean.user.fullName}" required="true"
 					requiredMessage="Campo de Nombre Completo obligatorio"
-					id="txtNombre"></p:inputText>
-
+					id="txtNombre" validator="#{userBean.validar}"><h:messages for="txtUserName"></h:messages></p:inputText>
+					
+					
 
 				<p:outputLabel value="Correo Electrónico:" />
 				<p:inputText value="#{userBean.user.emailAddress}" required="true"
 					requiredMessage="Campo de Correo Electrónico obligatorio"
-					id="txtCorreo">
+					id="txtCorreo" validator="#{userBean.validarCorreo}">
+					<h:messages for="txtUserName"></h:messages>
 				</p:inputText>
-	
+				
+
 					<p:outputLabel value="Usuario:" />
 					<p:inputText value="#{userBean.user.userName}" required="true"
-						requiredMessage="Campo de Usuario obligatorio">
+						requiredMessage="Campo de Usuario obligatorio" label="Usuario" validator="#{userBean.validarUsuarioRepetido}">
+						
+						<f:validateLength minimum="6" maximum="8" id="txtUserName"> </f:validateLength>
+						
 					</p:inputText>
+					<h:messages for="txtUserName"></h:messages>
 
 					<h:commandButton value="Registrarse"
 						action="#{userBean.adicionarUsuario}"></h:commandButton>
@@ -42,6 +49,8 @@
 		</p:panel>
 	</h:form>
 	<h:form>
+
+
 
 		<h:commandButton value="Regresar" action="PaginaPrincipal.xhtml"
 			style="width:100px; height:40px;  margin-bottom: 120px; margin-left: 90px"></h:commandButton>
